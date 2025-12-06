@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INF.03 — Wypisywanie: innerText / innerHTML / textContent / outerHTML</title>
+  <script src="script_inner_outer.js" defer></script>
+
+  <!-- Demo do textContent vs innerText (ukryty akapit) -->
+  <style>
+    .napis { display: none; } /* akapit ukryty: kiedyś innerText mógł zwracać pusty tekst; dziś oba działają podobnie */
+  </style>
+</head>
+<body>
+  <h1>Wypisywanie treści w JS — najprostsze przykłady</h1>
+
+  <!-- 1) innerText vs innerHTML -->
+  <section>
+    <h2>1. innerText vs innerHTML</h2>
+    <p>innerText traktuje znaczniki jako zwykły tekst. innerHTML interpretuje znaczniki HTML.</p>
+
+    <!-- Nagłówek do podmiany -->
+    <h2 class="tytul">Wylosuję dla Ciebie liczbę z przedziału od 1 do 100!</h2>
+
+    <!-- Dwa przyciski: ten sam cel, inne właściwości -->
+    <button onclick="losujLiczbeInnerText()">Losuj (innerText)</button>
+    <button onclick="losujLiczbeInnerHTML()">Losuj (innerHTML)</button>
+  </section>
+
+  <hr />
+
+  <!-- 2) textContent vs innerText (odczyt z ukrytego elementu) -->
+  <section>
+    <h2>2. textContent vs innerText (odczyt)</h2>
+    <p class="napis">Tajemnicza, ukryta na stronie treść akapitu.</p>
+    <button onclick="pokazZawartosc()">Pokaż zawartość (alert ×2)</button>
+    <p><small>W nowoczesnych przeglądarkach oba sposoby zwrócą tę samą treść.</small></p>
+  </section>
+
+  <hr />
+
+  <!-- 3) outerHTML — zamiana całego elementu -->
+  <section>
+    <h2>3. outerHTML — zmiana również „otoczki” elementu</h2>
+    <p id="tekst">To jest paragraf.</p>
+    <button onclick="zmienOuterHTML()">Zmień także rodzaj znacznika</button>
+    <p><small>Po kliknięciu &lt;p&gt; zostanie podmieniony na &lt;h2&gt;.</small></p>
+  </section>
+
+  <hr />
+
+  <!-- 4) Interpolacja (template strings) vs konkatenacja (+) -->
+  <section>
+    <h2>4. Interpolacja (template strings) vs konkatenacja (+)</h2>
+    <label>Imię: <input id="imie" value="Kasia" /></label>
+    <label>Nazwisko: <input id="nazwisko" value="Nowak" /></label>
+    <label>Wiek: <input id="wiek" type="number" value="18" /></label>
+    <div>
+      <button onclick="wypiszTemplate()">Wypisz — template strings</button>
+      <button onclick="wypiszConcat()">Wypisz — konkatenacja</button>
+    </div>
+    <pre id="wynik-template"></pre>
+  </section>
+
+  <!-- Mini ściąga (komentarz w HTML) -->
+  <!--
+    • innerText — ustawia/odczytuje sam tekst (znaczniki traktuje jako zwykłe znaki).
+    • innerHTML — ustawia/odczytuje tekst z interpretacją HTML (tagi „działają”).
+    • textContent — alternatywa dla innerText (bez interpretacji HTML).
+    • outerHTML — obejmuje cały element (znacznik + zawartość) — można podmienić np. <p> na <h2>.
+    • Template strings: używaj ` (backtick) i ${zmienna} — czytelnie łączysz tekst i wartości.
+  -->
+</body>
+</html>

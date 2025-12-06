@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INF.03 — Tablice w JavaScript (podstawy)</title>
+  <meta name="description" content="Proste, klikalne demo metod tablic w JavaScript: push, pop, splice, forEach, includes, concat, join, split i inne." />
+  <script src="script_tablice.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Tablice (arrays) w JavaScript — podstawy</h1>
+    <p>Klikaj przyciski i obserwuj wyniki w polach <code>&lt;pre&gt;</code>.</p>
+    <hr />
+  </header>
+
+  <main>
+    <!-- 1) Tworzenie i odczyt po indeksach -->
+    <section>
+      <h2>1) Tworzenie tablicy + odczyt indeksów</h2>
+      <button id="btn-create">Pokaż elementy i indeksy</button>
+      <pre id="out-create"></pre>
+    </section>
+
+    <!-- 2) Dodawanie/Usuwanie: push, unshift, pop, shift -->
+    <section>
+      <h2>2) Dodawanie / usuwanie</h2>
+      <div>
+        <button id="btn-push">push (dodaj na koniec)</button>
+        <button id="btn-unshift">unshift (dodaj na początek)</button>
+        <button id="btn-pop">pop (usuń z końca)</button>
+        <button id="btn-shift">shift (usuń z początku)</button>
+      </div>
+      <pre id="out-addremove"></pre>
+    </section>
+
+    <!-- 3) splice: usuwanie, wstawianie, podmiana -->
+    <section>
+      <h2>3) splice — usuń / wstaw / podmień</h2>
+      <div>
+        <button id="btn-splice-remove">Usuń 2 od indeksu 0 (splice)</button>
+        <button id="btn-splice-insert">Wstaw „Malina” na indeks 1 (splice)</button>
+        <button id="btn-splice-replace">Podmień indeks 2 na „Wiśnia” (splice)</button>
+      </div>
+      <pre id="out-splice"></pre>
+    </section>
+
+    <!-- 4) Iteracja: for, forEach, for...of -->
+    <section>
+      <h2>4) Iteracja po tablicy</h2>
+      <div>
+        <button id="btn-for">for (klasyczna pętla)</button>
+        <button id="btn-foreach">forEach (callback dla każdego)</button>
+        <button id="btn-forof">for...of (po wartościach)</button>
+      </div>
+      <pre id="out-iterate"></pre>
+    </section>
+
+    <!-- 5) Szukanie: includes, indexOf -->
+    <section>
+      <h2>5) Szukanie elementu</h2>
+      <div>
+        <button id="btn-includes">includes("Banan")</button>
+        <button id="btn-indexof">indexOf("Gruszka")</button>
+      </div>
+      <pre id="out-search"></pre>
+    </section>
+
+    <!-- 6) Łączenie i modyfikacje: concat, reverse, sort -->
+    <section>
+      <h2>6) Łączenie i modyfikacje</h2>
+      <div>
+        <button id="btn-concat">concat(owoce, warzywa)</button>
+        <button id="btn-reverse">reverse() (odwróć kolejność)</button>
+        <button id="btn-sort">sort() (alfabetycznie)</button>
+      </div>
+      <pre id="out-transform"></pre>
+    </section>
+
+    <!-- 7) Konwersje: join i split -->
+    <section>
+      <h2>7) Konwersje: join &lt;—&gt; split</h2>
+      <div>
+        <button id="btn-join">join(" ") → string</button>
+      </div>
+
+      <div style="margin-top: .5rem;">
+        <label>Tekst do podziału (split po spacji):
+          <input id="inp-text" type="text" value="Ala ma kota" />
+        </label>
+        <button id="btn-split">split(" ") → tablica</button>
+      </div>
+
+      <pre id="out-convert"></pre>
+    </section>
+
+  
+  </main>
+
+  <footer>
+    <hr />
+    <small>INF.03 — lekcja: Tablice w JS (podstawy)</small>
+  </footer>
+</body>
+</html>

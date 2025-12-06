@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>INF.03 — Lekcja 3: JavaScript</title>
+    <meta
+      name="description"
+      content="Prosty plik do demonstracji zagadnień JavaScript na INF.03"
+    />
+    <!-- Podpięty zewnętrzny skrypt -->
+    <script src="script_funkcje.js" defer></script>
+
+    <!-- <script>
+      alert("Witaj Świecie!");
+      // Kod JavaScript znajdujący się bezpośrednio w pliku HTML
+    </script> -->
+  </head>
+  <body>
+    <header>
+      <h1>INF.03 - Lekcja 3: JavaScript</h1>
+      <p>
+        Prosty szkielet do demonstracji kolejnych zagadnień z JavaScript
+      </p>
+      <nav></nav>
+      <hr />
+    </header>
+
+    <main id="app">
+      <!--
+    ==========================
+    NOTATKA: Jak podpiąć skrypt JS do HTML
+    ==========================
+
+    1) Po co to w ogóle jest?
+       Aby JavaScript mógł działać, przeglądarka musi go wczytać i uruchomić. Robimy to
+       znacznikiem <script> — albo wstawiając JS bezpośrednio w HTML (inline), albo
+       podpinając zewnętrzny plik .js.
+
+    2) Dwa podstawowe sposoby osadzenia kodu:
+
+       a) Skrypt bezpośrednio w HTML (INLINE)
+          <script>
+            alert('Witaj Świecie!');
+            // Kod JS umieszczony bezpośrednio w dokumencie HTML
+          </script>
+          Zalety: szybkość i prostota. Wady: mieszanie HTML i JS, gorsza organizacja,
+          trudniej wielokrotnie użyć tego samego kodu.
+          Na egzaminie INF.03 zwykle NIE polecamy (chyba że treść zadania wyraźnie tego wymaga).
+
+       b) Skrypt z pliku zewnętrznego (REKOMENDOWANE)
+          <script src="script.js"></script>
+          Zalety: porządek (separacja HTML/JS), możliwość cache'owania pliku przez przeglądarkę,
+          łatwe ponowne użycie na wielu podstronach. To jest standardowa, dobra praktyka.
+
+    3) Gdzie umieścić <script> z plikiem zewnętrznym?
+
+       • POD KONIEC <body>
+         (klasyczne, bez dodatkowych atrybutów)
+           ...
+           </main>
+           <script src="script.js"></script>
+         Zaleta: kod JS ładuje się po wczytaniu niemal całej treści strony, więc nie blokuje renderowania.
+         Dobre, gdy skrypt manipuluje elementami DOM.
+
+       • W <head> z atrybutem defer (ODROCZ WYKONANIE)
+           <head>
+             ...
+             <script src="script.js" defer></script>
+           </head>
+         Działanie: plik pobiera się równolegle z parsowaniem HTML, ale wykona się DOPIERO
+         po pełnym zbudowaniu dokumentu. Gwarancja, że DOM już istnieje, gdy skrypt startuje.
+         To bezpieczna alternatywa dla umieszczania skryptu na końcu <body>.
+
+       • W <head> z atrybutem async (ASYNCHRONICZNIE)
+           <head>
+             ...
+             <script src="script.js" async></script>
+           </head>
+         Działanie: plik pobiera się równolegle i URUCHAMIA od razu po pobraniu — nawet jeśli
+         HTML nie został jeszcze do końca przetworzony. Szybkie, ale nie ma gwarancji, że
+         elementy DOM już istnieją. Używaj do skryptów niezależnych od DOM (np. analityka).
+
+    4) Który wariant wybrać na egzaminie INF.03?
+       • Najczęściej: skrypt zewnętrzny, pod koniec <body>.
+       • Lub: w <head> z atrybutem defer (równie bezpiecznie dla DOM, czytelny układ pliku).
+       • Unikaj async dla skryptów, które manipulują DOM.
+       • Nie mieszaj JS inline w HTML, jeśli nie jest to wyraźnie wymagane.
+
+    5) Dodatkowe uwagi praktyczne:
+       • W HTML5 nie trzeba podawać type="text/javascript" - JS jest domyślny.
+       • W edytorach (np. VS Code) skrót "script:src" (Emmet) szybko wstawi znacznik <script src="...">.
+       • W tym pliku aktualnie używamy wariantu: <script src="script.js" defer></script> w sekcji <head>.
+
+    -->
+
+      <section aria-label="Notatka: jak podpiąć skrypt JS">
+        <pre>
+Jak podpiąć skrypt JS do HTML?
+
+[1] Na końcu &lt;body&gt; (klasycznie)
+...
+&lt;script src="script.js"&gt;&lt;/script&gt;
+
+[2] W &lt;head&gt; z defer
+&lt;script src="script.js" defer&gt;&lt;/script&gt;
+
+[3] W &lt;head&gt; z async (gdy skrypt nie dotyka DOM)
+&lt;script src="script.js" async&gt;&lt;/script&gt;
+        </pre>
+      </section>
+
+      <!--
+      NOTATKA: Jak mądrze nazywać funkcje (INF.03)
+
+      Dlaczego to ważne:
+      • Oceniane wg treści polecenia (klucza), nie tylko działania.
+      • Inna nazwa niż wymagana = łatwe punkty przepadają, nawet jeśli wszystko działa.
+
+      Zasady nazewnictwa:
+      • Używaj dokładnie tej nazwy, której wymaga polecenie.
+        Przykład: polecenie mówi "obliczSume" → funkcja musi nazywać się obliczSume().
+      • Stosuj camelCase: zaczynamy małą literą, kolejne słowa z wielkiej.
+        Przykłady: obliczSume(), sprawdzDaneWejsciowe(), obliczPoleKwadratu().
+      • Nie używaj polskich znaków, spacji ani znaków specjalnych (#, @, itp.).
+      • Nie skracaj, jeśli polecenie nie skraca. "pokazNazwisko" ≠ "pokNaz()".
+      • Gdy brak narzuconej nazwy, wybierz logiczną z czasownikiem:
+        np. sprawdzFormularz(), obliczRabat(), policzSamogloski().
+      • Unikaj nazw zarezerwowanych/wbudowanych i kolidujących:
+        alert, document, onclick, String, parseInt, itp.
+
+      Tip egzaminacyjny:
+      • Zachowaj spójność z treścią HTML (np. nazwy przycisków/ID), ułatwia to ocenę.
+      -->
+
+
+      <!-- FUNKCJE — WPROWADZENIE -->
+      <section id="funkcje-wprowadzenie">
+        <h2>Funkcje - wprowadzenie</h2>
+        <p>
+          Funkcja to nazwany fragment kodu, który możemy wielokrotnie wywołać.
+        </p>
+        <button id="btn-vowels">Uruchom demo: policz samogloski</button>
+        <pre id="out-vowels"></pre>
+      </section>
+
+      <!-- FUNKCJE NIE STARTUJĄ SAME -->
+      <section id="funkcje-start">
+        <h2>Funkcje nie startują same</h2>
+        <p>
+          Definicja to tylko “przepis”. Wykonanie = wywołanie lub podpięcie do
+          zdarzenia.
+        </p>
+        <button id="btn-hello">Wywolaj: przywitaj_kursanta()</button>
+        <pre id="out-hello"></pre>
+      </section>
+
+      <!-- ZDARZENIA: onclick vs addEventListener -->
+      <section id="zdarzenia-click">
+        <h2>
+          Obsługa zdarzeń: <code>onclick</code> vs <code>addEventListener</code>
+        </h2>
+
+        <!--
+            RÓŻNICE (skrót):
+            * onclick (inline w HTML):
+            • szybkie do prostych demo;
+            • miesza JS z HTML (gorsza separacja);
+            • właściwość onclick przechowuje 1 funkcję — kolejne przypisanie nadpisuje poprzednie;
+            • trudniej odczepić i testować logikę.
+
+            * addEventListener (w JS):
+            • lepszy porządek — logika w pliku .js;
+            • można dodać wiele handlerów tego samego zdarzenia na 1 elemencie;
+            • łatwe odpinanie: removeEventListener;
+            • obsługuje opcje (once, passive, capture) i delegację zdarzeń.
+
+            W praktyce (także na INF.03): preferuj addEventListener do normalnej logiki,
+            a onclick zostaw do bardzo małych, jednorazowych przykładów.
+        -->
+
+        <button id="btn-inline" onclick="pokazKomunikat()">
+          Klik (inline <code>onclick</code>)
+        </button>
+        <button id="btn-add">Klik (<code>addEventListener</code>)</button>
+        <pre id="out-click"></pre>
+      </section>
+
+      <!-- Zdarzenia w JavaScript -->
+      <section id="notatka-zdarzenia">
+        <h2>Zdarzenia w JavaScript</h2>
+        <p>
+          Zdarzenia (events) pozwalają reagować na działania użytkownika i
+          zmiany na stronie. Do każdego zdarzenia możemy przypisać funkcję (co
+          ma się wtedy stać). W prostych projektach można użyć atrybutów HTML
+          (np. <code>onclick</code>), a w praktyce na co dzień polecany jest
+          <code>addEventListener</code>.
+        </p>
+
+        <h3>Najpopularniejsze zdarzenia na INF.03</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Zdarzenie</th>
+              <th>Atrybut HTML</th>
+              <th>Opis</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>click</td>
+              <td>onclick</td>
+              <td>Kliknięcie na elemencie</td>
+            </tr>
+            <tr>
+              <td>mouseover</td>
+              <td>onmouseover</td>
+              <td>Najechanie kursorem</td>
+            </tr>
+            <tr>
+              <td>mouseout</td>
+              <td>onmouseout</td>
+              <td>Odsunięcie kursora</td>
+            </tr>
+            <tr>
+              <td>change</td>
+              <td>onchange</td>
+              <td>
+                Zmiana wartości (np. w <code>&lt;input&gt;</code>,
+                <code>&lt;select&gt;</code>)
+              </td>
+            </tr>
+            <tr>
+              <td>focus</td>
+              <td>onfocus</td>
+              <td>Wejście kursorem w pole edycyjne</td>
+            </tr>
+            <tr>
+              <td>blur</td>
+              <td>onblur</td>
+              <td>Wyjście z pola edycyjnego</td>
+            </tr>
+            <tr>
+              <td>keydown</td>
+              <td>onkeydown</td>
+              <td>Wciśnięcie klawisza</td>
+            </tr>
+            <tr>
+              <td>keyup</td>
+              <td>onkeyup</td>
+              <td>Puszczenie klawisza</td>
+            </tr>
+            <tr>
+              <td>load</td>
+              <td>onload</td>
+              <td>
+                Załadowanie całej strony (np. w <code>&lt;body&gt;</code>)
+              </td>
+            </tr>
+            <tr>
+              <td>submit</td>
+              <td>onsubmit</td>
+              <td>Wysłanie formularza</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!--
+        NOTATKA: zdarzenie "change" — dwa podejścia
+
+        Wersja A (HTML, onchange):
+        • Select: #kolor-changehtml z atrybutem onchange="zmienTlo()"
+        • Funkcja zmienTlo() pobiera value z #kolor-changehtml i ustawia document.body.style.backgroundColor
+        • Reset: #btn-reset-bg-changehtml powinien w handlerze ustawiać select.value = 'white'
+        Uwaga: w pokazanym JS reset celuje w #kolor-changedemo; jeśli chcesz resetować wersję inline, zmień na #kolor-changehtml
+
+        Wersja B (JS, addEventListener):
+        • Select: #kolor-changedemo ma nasłuch ustawiony w setupNotatkaChangeDemo()
+        • Zmiana koloru w listenerze: document.body.style.backgroundColor = this.value
+        • Reset: #btn-reset-bg-changedemo czyści tło i ustawia select.value = 'white'
+
+        Różnice w skrócie:
+        • onchange w HTML — szybkie, ale miesza JS z HTML i zwykle tylko jeden handler
+        • addEventListener w JS — logika w pliku .js, można dodać wiele handlerów, łatwiej testować i odłączać
+        • Tekst w select zmienia się sam (to wybrana opcja); reset przywraca widocznie "Biały" i domyślne tło strony
+        -->
+
+        <h2>Zdarzenie <code>change</code>: wybór koloru tła</h2>
+
+        <label for="kolor-changehtml">Wybierz kolor tła:</label>
+        <select id="kolor-changehtml" onchange="zmienTlo()">
+          <option value="white">Biały</option>
+          <option value="lightblue">Niebieski</option>
+          <option value="lightgreen">Zielony</option>
+          <option value="lightgray">Szary</option>
+        </select>
+
+        <button id="btn-reset-bg-changehtml">Reset tła</button>
+
+        <h3>Przykład: <code>bez change</code> zmienia kolor tła</h3>
+        <label for="kolor-changedemo">Wybierz kolor tła:</label>
+        <select id="kolor-changedemo">
+          <option value="white">Bialy</option>
+          <option value="lightblue">Niebieski</option>
+          <option value="lightgreen">Zielony</option>
+          <option value="lightgray">Szary</option>
+        </select>
+        <button id="btn-reset-bg-changedemo">Reset tla</button>
+        <p>
+          <small
+            >To demo używa <code>addEventListener('change')</code> (bez atrybutu
+            <code>onchange</code>).</small
+          >
+        </p>
+      </section>
+
+      <!-- return — zwracanie wartości -->
+      <section id="funkcje-return">
+        <h2>Funkcja zwracająca wartość (<code>return</code>)</h2>
+        <p>
+          Porównanie: wersja z <code>alert</code> vs. wersja zwracająca wynik.
+        </p>
+        <label>a: <input id="a" type="number" value="5" /></label>
+        <label>b: <input id="b" type="number" value="10" /></label>
+        <div>
+          <button id="btn-pole-alert">obliczPole (alert)</button>
+          <button id="btn-pole-return">obliczPole (return → wypisz)</button>
+          <button id="btn-suma-pol">Suma pol 5x10 i 3x4</button>
+        </div>
+        <pre id="out-area"></pre>
+      </section>
+
+      <!-- Funkcje anonimowe oraz strzałkowe-->
+      <section id="funkcje-anonimowe-strzalkowe">
+        <h2>Funkcje anonimowe i strzalkowe</h2>
+        <button id="btn-powiedz">powiedzCzesc() (zmienna)</button>
+        <button id="btn-this-function">this w function()</button>
+        <button id="btn-this-arrow">this w =&gt; (arrow)</button>
+        <ul id="list-numbers"></ul>
+      </section>
+
+
+    </main>
+
+    <footer>
+      <hr />
+      <small>Plik: Lekcja 3 — szkic • INF.03</small>
+    </footer>
+  </body>
+</html>

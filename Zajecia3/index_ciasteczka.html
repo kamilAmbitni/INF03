@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <title>Cookies — proste demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <script src="script_ciasteczka.js" defer></script>
+</head>
+<body>
+  <h1>Obsługa ciasteczek (document.cookie) — demo</h1>
+  <p>
+    Kliknij przyciski poniżej, aby <strong>ustawić</strong>, <strong>odczytać</strong>,
+    <strong>usunąć</strong> lub ustawić <strong>tymczasowe</strong> ciasteczko
+    o nazwie <code>odwiedzono</code>.
+  </p>
+
+  <div class="panel">
+    <!-- Ustaw stałe ciasteczko (wygasa 31.12.2025) -->
+    <button onclick="ustawCiasteczko()">Ustaw ciasteczko</button>
+
+    <!-- Sprawdź, czy istnieje odwiedzono=1 -->
+    <button onclick="pokazCiasteczko()">Czy już odwiedzono?</button>
+
+    <!-- Usuń (ustawia datę ważności w przeszłości) -->
+    <button onclick="usunCiasteczko()">Usuń ciasteczko</button>
+
+    <!-- Ustaw ciasteczko ważne 10 sekund -->
+    <button onclick="ustawTymczasoweCiasteczko()">Ustaw na 10 s</button>
+  </div>
+
+  <!-- Tu pokażemy komunikaty -->
+  <div id="wynik">Tutaj pojawi się wynik działania.</div>
+
+  <p><small>
+    Uwaga: ciasteczka są zapisywane dla bieżącej domeny/ścieżki. W trybie plikowym
+    (otwieranie przez <code>file://</code>) niektóre przeglądarki mogą ograniczać działanie cookies.
+    Najpewniej działa to na prostym lokalnym serwerze (np. VS Code Live Server).
+  </small></p>
+
+  <!-- Podłącz skrypt z funkcjami: ustawCiasteczko, pobierzCiasteczko, pokazCiasteczko, usunCiasteczko, ustawTymczasoweCiasteczko -->
+  <script src="cookies.js"></script>
+
+  <noscript>Włącz JavaScript, aby skrypt z ciasteczkami mógł działać.</noscript>
+</body>
+</html>

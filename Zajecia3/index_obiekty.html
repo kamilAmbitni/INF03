@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <title>Obiekty i funkcje wbudowane JS — proste demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="script_obiekty.js" defer></script>
+</head>
+<body>
+  <h1>Obiekty i funkcje wbudowane JavaScript — demo</h1>
+  <p>Każdy blok ma przyciski + prosty wynik w <code>&lt;pre&gt;</code>. W konsoli (F12) też pojawiają się logi.</p>
+
+  <!-- 1) Okna dialogowe: alert / prompt / confirm -->
+  <section id="dlg">
+    <h2>Okna dialogowe: <code>alert</code>, <code>prompt</code>, <code>confirm</code></h2>
+    <div class="row">
+      <button id="btn-alert">Pokaż alert()</button>
+      <button id="btn-prompt">Zapytaj o imię (prompt)</button>
+    </div>
+
+    <h3>Confirm + reset formularza</h3>
+    <form id="formularz">
+      <div class="row">
+        <label>Imię: <input type="text" name="imie" id="f-imie"></label>
+        <label>Nazwisko: <input type="text" name="nazwisko" id="f-nazwisko"></label>
+      </div>
+      <!-- Uwaga: tutaj specjalnie używamy inline-HTML z return, żeby pokazać dokładnie ten mechanizm -->
+      <input type="reset" value="Resetuj (z confirm)" onclick="return potwierdzReset();">
+      <button type="button" id="btn-reset-js">Resetuj programowo (JS)</button>
+    </form>
+    <pre id="out-dlg"></pre>
+  </section>
+
+  <!-- 2) Obiekt Math — wybrane metody + trygonometria z radianami -->
+  <section id="math">
+    <h2>Obiekt <code>Math</code> — przykłady</h2>
+    <div class="row">
+      <label>Liczba: <input type="number" id="liczba-math" value="4.6" step="0.1"></label>
+      <button id="btn-math-show">Pokaż wyniki metod</button>
+    </div>
+
+    <h3>Trygonometria (radiany!)</h3>
+    <div class="row">
+      <label>Kąt (stopnie): <input type="number" id="deg" value="30" step="1"></label>
+      <button id="btn-sin">Policz sin(kąta)</button>
+    </div>
+    <pre id="out-math"></pre>
+  </section>
+
+  <!-- 3) Losowania z Math.random() -->
+  <section id="random">
+    <h2>Liczby losowe — <code>Math.random()</code></h2>
+
+    <div class="row">
+      <button id="btn-rand-0n">Losuj całkowitą 0..9</button>
+      <label>a: <input type="number" id="r-a" value="5"></label>
+      <label>b: <input type="number" id="r-b" value="12"></label>
+      <button id="btn-rand-a-b">Losuj całkowitą a..b</button>
+      <label>a: <input type="number" id="rf-a" value="2.5" step="0.1"></label>
+      <label>b: <input type="number" id="rf-b" value="5.0" step="0.1"></label>
+      <button id="btn-rand-float">Losuj zmienno. a..b (bez b)</button>
+    </div>
+
+    <div class="row">
+      <button id="btn-pin">Losuj 4-cyfrowy PIN</button>
+      <button id="btn-dice">Rzut kostką (1–6)</button>
+      <button id="btn-color">Losowy kolor z tablicy</button>
+    </div>
+    <pre id="out-random"></pre>
+  </section>
+
+  <!-- 4) Obiekt Date — bieżąca data/czas, wiek, formatowanie, pomiar czasu, settery -->
+  <section id="date">
+    <h2>Obiekt <code>Date</code> — data i czas</h2>
+
+    <div class="row">
+      <button id="btn-now">Pokaż bieżącą datę/czas + gettery</button>
+      <button id="btn-locale">Pokaż toLocaleDateString()</button>
+    </div>
+
+    <div class="row">
+      <label>Rok urodzenia: <input type="number" id="rok-ur" value="2005"></label>
+      <button id="btn-age">Oblicz wiek</button>
+    </div>
+
+    <div class="row">
+      <button id="btn-benchmark">Zmień czas (benchmark) — prosta pętla</button>
+      <button id="btn-set-2000">Ustaw datę na 01.01.2000</button>
+    </div>
+    <pre id="out-date"></pre>
+  </section>
+
+  <!-- 5) console.* -->
+  <section id="console">
+    <h2>Obiekt <code>console</code></h2>
+    <div class="row">
+      <button id="btn-console-log">console.log()</button>
+      <button id="btn-console-table">console.table()</button>
+      <button id="btn-console-error">console.error()</button>
+    </div>
+    <p><small>Wynik zobaczysz w konsoli przeglądarki (F12 → Console).</small></p>
+  </section>
+
+  <!-- JS podpinamy na końcu, żeby elementy już istniały w DOM -->
+  <script src="builtins.js"></script>
+  <noscript>Włącz JavaScript, aby przykłady działały.</noscript>
+</body>
+</html>

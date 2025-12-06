@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>onclick vs addEventListener — proste demo</title>
+  <script src="script_onclick_addEventListener.js" defer></script>
+</head>
+<body>
+  <h1>Atrybut <code>onclick</code> vs. <code>addEventListener</code></h1>
+
+  <!-- 1) onclick w HTML (atrybut) -->
+  <section>
+    <h2>1. onclick w HTML (atrybut)</h2>
+    <button onclick="pokazKomunikat()">Klik (inline onclick)</button>
+    <p><small>Logika (funkcja) zdefiniowana w JS, ale sam <code>onclick="..."</code> jest w HTML.</small></p>
+  </section>
+
+  <hr />
+
+  <!-- 2) onclick w JS (element.onclick = ...) -->
+  <section>
+    <h2>2. onclick w JS (nadpisuje poprzednią funkcję)</h2>
+    <button id="przycisk-onclick-prop">Klik (element.onclick w JS)</button>
+    <button id="przycisk-overwrite">Klik (nadpisywanie #1 → #2)</button>
+    <p><small><code>element.onclick = ...</code> pozwala mieć tylko JEDEN handler — nowy nadpisze poprzedni.</small></p>
+  </section>
+
+  <hr />
+
+  <!-- 3) addEventListener — funkcja nazwana -->
+  <section>
+    <h2>3. addEventListener — funkcja nazwana</h2>
+    <button id="przycisk-add-named">Klik (addEventListener + funkcja nazwana)</button>
+    <p><small>W argumencie przekazujesz referencję do funkcji (bez nawiasów).</small></p>
+  </section>
+
+  <hr />
+
+  <!-- 4) addEventListener — wiele handlerów -->
+  <section>
+    <h2>4. addEventListener — wiele reakcji na jeden klik</h2>
+    <button id="przycisk-add-multi">Klik (2 reakcje: alert + zmiana koloru)</button>
+    <p><small>Można dodać kilka handlerów do tego samego zdarzenia.</small></p>
+  </section>
+
+  <hr />
+
+  <!-- 5) addEventListener — funkcja anonimowa -->
+  <section>
+    <h2>5. addEventListener — funkcja anonimowa</h2>
+    <button id="przycisk-add-anon">Klik (anonimowa function)</button>
+  </section>
+
+  <hr />
+
+  <!-- 6) addEventListener — funkcja strzałkowa -->
+  <section>
+    <h2>6. addEventListener — funkcja strzałkowa</h2>
+    <button id="przycisk-add-arrow">Klik (arrow)</button>
+    <p><small>Przy strzałkach używaj <code>e.currentTarget</code>, a nie <code>this</code>.</small></p>
+  </section>
+
+  <hr />
+
+  <!-- 7) removeEventListener — funkcja nazwana -->
+  <section>
+    <h2>7. removeEventListener — funkcja nazwana</h2>
+    <button id="przycisk-remove">Pokaż komunikat (do wyłączenia)</button>
+    <button id="usun-remove">Usuń obsługę</button>
+  </section>
+
+  <hr />
+
+  <!-- 8) removeEventListener — funkcja anonimowa w zmiennej -->
+  <section>
+    <h2>8. removeEventListener — anonimowa w zmiennej</h2>
+    <button id="przycisk-remove-anon">Klik (anonimowa — do usunięcia)</button>
+    <button id="usun-remove-anon">Usuń anonimową</button>
+    <p><small>Aby usunąć anonimową, musisz mieć do niej referencję (zapisać do zmiennej).</small></p>
+  </section>
+
+  <hr />
+
+  <!-- 9) removeEventListener — strzałkowa w zmiennej -->
+  <section>
+    <h2>9. removeEventListener — strzałkowa w zmiennej</h2>
+    <button id="przycisk-remove-arrow">Klik (arrow — do usunięcia)</button>
+    <button id="usun-remove-arrow">Usuń arrow</button>
+  </section>
+</body>
+</html>

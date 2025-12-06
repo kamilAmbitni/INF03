@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <title>JS — zmiana stylów elementów</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="script_style.js" defer></script>
+</head>
+<body>
+  <h1>Zmiana stylów elementów w JavaScript (style)</h1>
+  <p class="muted">
+    W JS każdy uchwycony element ma właściwość <code>style</code>. Przez nią zmieniamy CSS „w locie”.
+    Uwaga: nazwy z myślnikiem w CSS (np. <code>background-color</code>) w JS zapisujemy w camelCase:
+    <code>backgroundColor</code>, <code>fontSize</code>, <code>textAlign</code>, itd.
+  </p>
+
+  <section>
+    <h2>1) Zmień kolor i rozmiar tekstu (prosty przykład)</h2>
+    <p id="napis">To jest przykładowy akapit. Kliknij przyciski poniżej, aby zmienić styl.</p>
+    <div>
+      <button id="btn-zmien-styl">Zmień styl (czerwony + 24px)</button>
+      <button id="btn-reset-styl">Resetuj styl (wróć do domyślnego)</button>
+    </div>
+    <pre>
+CSS  →  JS (camelCase)
+background-color → backgroundColor
+font-size        → fontSize
+text-align       → textAlign
+margin-top       → marginTop
+border-radius    → borderRadius
+    </pre>
+  </section>
+
+  <section>
+    <h2>2) Warunkowa zmiana stylu pola (zielony &lt;=&gt; czerwony)</h2>
+    <label>
+      Podaj liczbę:
+      <input id="pole-liczba" type="number" placeholder="np. 120" />
+    </label>
+    <button id="btn-sprawdz">Sprawdź i pokoloruj</button>
+    <p class="muted">Reguła: jeśli liczba &gt; 100 → tło zielone, w przeciwnym razie czerwone.</p>
+  </section>
+
+  <section>
+    <h2>3) „Ciemny motyw” (zmień tło i kolor tekstu całej strony)</h2>
+    <div>
+      <button id="btn-dark-on">Włącz ciemny motyw</button>
+      <button id="btn-dark-off">Wyłącz ciemny motyw</button>
+    </div>
+    <p class="muted">
+      Zmieniamy style na <code>document.body.style</code>:
+      <code>backgroundColor</code>, <code>color</code>.
+    </p>
+  </section>
+
+</body>
+</html>

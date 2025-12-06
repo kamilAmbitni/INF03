@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INF.03 — Pętle w JavaScript (podstawy)</title>
+  <meta name="description" content="Proste przykłady pętli for / while / do..while oraz break / continue / forEach w JS." />
+  <script src="script_petle.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Pętle w JavaScript — proste demo</h1>
+    <p>Przykłady: <code>for</code>, <code>while</code>, <code>do..while</code>, <code>break</code>, <code>continue</code>, <code>forEach()</code>.</p>
+    <hr />
+  </header>
+
+  <main>
+    <!-- 1) for — znamy liczbę iteracji -->
+    <section>
+      <h2>Pętla <code>for</code> — znamy liczbę iteracji</h2>
+      <div>
+        <button id="btn-for-1-10">Wypisz 1..10 (rosnąco)</button>
+        <pre id="out-for-up"></pre>
+      </div>
+      <div>
+        <button id="btn-for-10-0">Odliczanie 10..0 (malejąco)</button>
+        <pre id="out-for-down"></pre>
+      </div>
+      <div>
+        <button id="btn-for-step2">Parzyste 2..10 (krok = 2)</button>
+        <pre id="out-for-step"></pre>
+      </div>
+      <p><small>
+        Składnia: <code>for (start; warunek; krok) { /* ciało pętli */ }</code><br />
+        • Inkrementacja: <code>i++</code> (zwiększ o 1) • Dekrementacja: <code>i--</code> (zmniejsz o 1) • Krok: np. <code>i += 2</code>.
+      </small></p>
+    </section>
+
+    <hr />
+
+    <!-- 2) while — dopóki warunek jest spełniony -->
+    <section>
+      <h2>Pętla <code>while</code> — dopóki warunek jest spełniony</h2>
+      <button id="btn-while-guess">Zagraj: zgadnij liczbę 1..100</button>
+      <pre id="out-while"></pre>
+      <p><small>
+        Pętla <code>while</code> wykonuje się tak długo, jak warunek jest prawdziwy. Tu pytamy o liczbę aż trafisz (lub anulujesz).
+      </small></p>
+    </section>
+
+    <hr />
+
+    <!-- 3) do..while — wykona się co najmniej raz -->
+    <section>
+      <h2>Pętla <code>do..while</code> — co najmniej jedno wykonanie</h2>
+      <button id="btn-do-login">Podaj hasło (demo do..while)</button>
+      <pre id="out-do"></pre>
+      <p><small>
+        <code>do { /* ciało */ } while (warunek);</code> — warunek sprawdzany na końcu, więc ciało wykona się minimum raz.
+      </small></p>
+    </section>
+
+    <hr />
+
+    <!-- 4) break — przerwij pętlę -->
+    <section>
+      <h2><code>break</code> — przerwanie całej pętli</h2>
+      <button id="btn-break-7">Znajdź pierwszą liczbę podzielną przez 7 w przedziale 30..50</button>
+      <pre id="out-break"></pre>
+    </section>
+
+    <hr />
+
+    <!-- 5) continue — pomiń jedną iterację -->
+    <section>
+      <h2><code>continue</code> — pomiń bieżącą iterację</h2>
+      <button id="btn-continue-names">Wypisz tylko niepuste imiona</button>
+      <pre id="out-continue"></pre>
+      <p><small>Jeśli element jest pustym tekstem <code>""</code> — pomijamy go i jedziemy dalej.</small></p>
+    </section>
+
+    <hr />
+
+    <!-- 6) forEach — iteracja po tablicy -->
+    <section>
+      <h2><code>forEach()</code> — iteracja po elementach tablicy</h2>
+      <button id="btn-foreach-sum">Zsumuj tablicę [10, 20, 30, 40]</button>
+      <pre id="out-foreach"></pre>
+      <p><small>
+        <code>tablica.forEach((element, indeks) =&gt; { ... })</code> — wygodny sposób na przejście po wszystkich elementach.
+      </small></p>
+    </section>
+  </main>
+
+  <footer>
+    <hr />
+    <small>Plik: pętle — demo INF.03</small>
+  </footer>
+</body>
+</html>

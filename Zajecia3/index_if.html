@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>INF.03 — Instrukcje warunkowe (if)</title>
+  <meta name="description" content="Podstawy if/else w JavaScript: = vs == vs ===, OR/AND/NOT, priorytety, ternary, else if." />
+  <script src="script_if.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Instrukcje warunkowe w JS — proste demo</h1>
+    <p>Przykłady: <code>if/else</code>, <code>||</code>, <code>&amp;&amp;</code>, <code>!</code>, <code>? :</code>, <code>else if</code>, oraz porównania <code>=</code> vs <code>==</code> vs <code>===</code>.</p>
+    <hr />
+  </header>
+
+  <main>
+    <!-- 0) = vs == vs === -->
+    <section id="sekcja-porownania">
+      <h2>= vs == vs ===</h2>
+      <p>
+        <strong>=</strong> — przypisanie (ustawienie wartości zmiennej).<br />
+        <strong>==</strong> — porównanie z konwersją typów (luźne).<br />
+        <strong>===</strong> — porównanie bez konwersji (ścisłe: porównuje wartość i typ).
+      </p>
+
+      <label>A: <input id="eq-a" value="5" /></label>
+      <label>B: <input id="eq-b" value="5" /></label>
+      <label><input type="checkbox" id="eq-as-number" /> porównaj jako liczby</label>
+      <div>
+        <button id="btn-compare">Porównaj (== i ===)</button>
+      </div>
+      <pre id="out-eq"></pre>
+
+      <!-- małe ostrzeżenie -->
+      <p><small>Uwaga: w polach formularza wartości są stringami. <code>==</code> potrafi zamienić typy (np. <code>"5" == 5</code> → true), ale <code>===</code> już nie (<code>"5" === 5</code> → false).</small></p>
+    </section>
+
+    <hr />
+
+    <!-- 1) if/else — PIN -->
+    <section id="sekcja-pin">
+      <h2>if/else — sprawdzanie PIN</h2>
+      <label>PIN: <input id="pin" type="password" inputmode="numeric" autocomplete="off" /></label>
+      <button id="btn-pin">Sprawdź PIN</button>
+      <pre id="out-pin"></pre>
+      <p><small>Typowy błąd: użycie <strong>=</strong> zamiast <strong>==</strong> lub <strong>===</strong> w warunku.</small></p>
+    </section>
+
+    <hr />
+
+    <!-- 2) OR (||) — puste pola -->
+    <section id="sekcja-or">
+      <h2>OR (||) — sprawdzanie pustych pól</h2>
+      <label>Liczba 1: <input id="liczba1" /></label>
+      <label>Liczba 2: <input id="liczba2" /></label>
+      <button id="btn-or">Sprawdź</button>
+      <pre id="out-or"></pre>
+    </section>
+
+    <hr />
+
+    <!-- 3) AND (&&) — logowanie -->
+    <section id="sekcja-and">
+      <h2>AND (&&) — logowanie</h2>
+      <label>Login: <input id="login" value="admin" /></label>
+      <label>Hasło: <input id="haslo" type="password" value="tajne" /></label>
+      <button id="btn-and">Zaloguj</button>
+      <pre id="out-and"></pre>
+    </section>
+
+    <hr />
+
+    <!-- 4) Priorytet && przed || -->
+    <section id="sekcja-priorytet">
+      <h2>Priorytet: <code>&amp;&amp;</code> przed <code>||</code></h2>
+      <label>Imię: <input id="p-imie" value="Marek" /></label>
+      <label>Wiek: <input id="p-wiek" type="number" value="17" /></label>
+      <div>
+        <button id="btn-bez-nawiasow">Warunek: imie == "Marek" || imie == "Adam" && wiek >= 18</button>
+        <button id="btn-z-nawiasami">Warunek: (imie == "Marek" || imie == "Adam") && wiek >= 18</button>
+      </div>
+      <pre id="out-priorytet"></pre>
+      <p><small>Bez nawiasów pełnoletność sprawdzana jest tylko dla „Adam”. Z nawiasami — dla obu („Marek” lub „Adam”).</small></p>
+    </section>
+
+    <hr />
+
+    <!-- 5) NOT (!) + isNaN -->
+    <section id="sekcja-not">
+      <h2>NOT (!) + isNaN — czy to liczba?</h2>
+      <label>Wpisz coś: <input id="liczba-tekst" value="42" /></label>
+      <button id="btn-not">Sprawdź</button>
+      <pre id="out-not"></pre>
+    </section>
+
+    <hr />
+
+    <!-- 6) Operator trójargumentowy -->
+    <section id="sekcja-ternary">
+      <h2>Operator trójargumentowy <code>? :</code></h2>
+      <label>Wiek: <input id="t-wiek" type="number" value="18" /></label>
+      <button id="btn-ternary">Oceń (Pełnoletni / Niepełnoletni)</button>
+      <pre id="out-ternary"></pre>
+    </section>
+
+    <hr />
+
+    <!-- 7) else if — więcej przypadków -->
+    <section id="sekcja-elseif">
+      <h2>else if — trzy scenariusze</h2>
+      <label>Wiek: <input id="e-wiek" type="number" value="20" /></label>
+      <button id="btn-elseif">Sprawdź komunikat</button>
+      <pre id="out-elseif"></pre>
+    </section>
+  </main>
+
+  <footer>
+    <hr />
+    <small>Plik demo: if / porównania / operatory logiczne</small>
+  </footer>
+</body>
+</html>

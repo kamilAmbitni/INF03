@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JS — Przetwarzanie napisów (stringów)</title>
+    <meta name="description" content="Proste demo operacji na łańcuchach znaków w JavaScript" />
+    <!-- Łączymy JS z atrybutem defer, żeby kod wykonał się po zbudowaniu DOM -->
+    <script src="script_napisy.js" defer></script>
+  </head>
+  <body>
+    <h1>Przetwarzanie napisów w JavaScript — podstawy</h1>
+    <p>
+      Poniżej znajdziesz krótkie, działające przykłady do najczęstszych zadań na INF.03:
+      długość napisu, pobieranie znaków, wyszukiwanie, wycinanie, zamiana fragmentów,
+      zmiana wielkości liter oraz <code>split()</code>.
+    </p>
+
+    <!-- 1) length + charAt -->
+    <section id="sec-basic">
+      <h2>1) Długość napisu i pobieranie znaku</h2>
+      <label>Tekst:
+        <input id="in-tekst" type="text" value="JavaScript" />
+      </label>
+      <br />
+      <label>Indeks znaku (liczymy od 0):
+        <input id="in-index" type="number" value="2" />
+      </label>
+      <br />
+      <button id="btn-basic">Pokaż length i znak</button>
+      <pre id="out-basic"></pre>
+      <p><small>Tip: <code>length</code> zwraca liczbę znaków; <code>charAt(i)</code> pobiera znak o indeksie <code>i</code>.</small></p>
+    </section>
+
+    <!-- 2) immutability -->
+    <section id="sec-immutable">
+      <h2>2) NEMODYFIKOWALNOŚĆ (immutable) – tworzymy nowy łańcuch</h2>
+      <p>
+        Zmienimy „JavaScript” → „JavaSkrypt” bez modyfikacji „w miejscu”.
+        Zrobimy to pętlą i operatorem <code>+=</code> (doklejanie).
+      </p>
+      <button id="btn-immut">Zrób „JavaSkrypt”</button>
+      <pre id="out-immut"></pre>
+    </section>
+
+    <!-- 3) wyszukiwanie -->
+    <section id="sec-find">
+      <h2>3) Wyszukiwanie w tekście: <code>indexOf</code>, <code>lastIndexOf</code>, (proste) „ignore case”</h2>
+      <label>Tekst do przeszukania:
+        <textarea id="find-tekst" rows="3">JavaScript to super język. Lubię JavaScript!</textarea>
+      </label>
+      <br />
+      <label>Szukaj frazy:
+        <input id="find-szukanie" type="text" value="Script" />
+      </label>
+      <label>
+        <input id="find-icase" type="checkbox" />
+        ignoruj wielkość liter (prosto)
+      </label>
+      <br />
+      <button id="btn-find">Szukaj</button>
+      <pre id="out-find"></pre>
+      <p><small>Uwaga: tu „ignoruj wielkość” robimy przez porównanie wersji z <code>toLowerCase()</code> (prosty wariant).</small></p>
+    </section>
+
+    <!-- 4) wycinanie -->
+    <section id="sec-cut">
+      <h2>4) Wycinanie fragmentów: <code>slice</code>, <code>substring</code>, <code>substr</code></h2>
+      <label>Tekst:
+        <input id="cut-tekst" type="text" value="JavaScript" />
+      </label>
+      <div>
+        <label>start: <input id="cut-start" type="number" value="4" /></label>
+        <label>end (dla slice/substring, opcj.): <input id="cut-end" type="number" /></label>
+        <label>length (dla substr): <input id="cut-len" type="number" value="6" /></label>
+      </div>
+      <button id="btn-slice">Użyj slice(start, end)</button>
+      <button id="btn-substring">Użyj substring(start, end)</button>
+      <button id="btn-substr">Użyj substr(start, length)</button>
+      <pre id="out-cut"></pre>
+      <p><small><code>substr</code> jest uznawane za przestarzałe (deprecated), ale wciąż działa.</small></p>
+    </section>
+
+    <!-- 5) replace -->
+    <section id="sec-replace">
+      <h2>5) Zamiana fragmentu: <code>replace</code></h2>
+      <label>Tekst:
+        <input id="rep-tekst" type="text" value="kot, Kot, KOT, kotek" />
+      </label>
+      <div>
+        <label>szukaj: <input id="rep-szukaj" type="text" value="kot" /></label>
+        <label>na: <input id="rep-na" type="text" value="pies" /></label>
+      </div>
+      <button id="btn-rep-first">Zamień pierwsze wystąpienie</button>
+      <button id="btn-rep-all">Zamień wszystkie (prosto)</button>
+      <button id="btn-rep-all-icase">Zamień wszystkie (ignoruj wielkość)</button>
+      <pre id="out-replace"></pre>
+      <p><small>Prosto = przez <code>split/join</code> (bez RegExp), żeby uniknąć pułapek z regexem u początkujących.</small></p>
+    </section>
+
+    <!-- 6) lower/upper -->
+    <section id="sec-case">
+      <h2>6) Zmiana wielkości liter</h2>
+      <label>Tekst:
+        <input id="case-tekst" type="text" value="Ala Ma Kota 123" />
+      </label>
+      <br />
+      <button id="btn-lower">toLowerCase()</button>
+      <button id="btn-upper">toUpperCase()</button>
+      <pre id="out-case"></pre>
+    </section>
+
+    <!-- 7) split -->
+    <section id="sec-split">
+      <h2>7) Podział tekstu na tablicę: <code>split</code></h2>
+      <label>Tekst:
+        <input id="split-tekst" type="text" value="Ala ma kota" />
+      </label>
+      <div>
+        <label>separator (np. spacja, przecinek, pusty = każdy znak):
+          <input id="split-sep" type="text" value=" " />
+        </label>
+        <label>limit (opcjonalny): <input id="split-limit" type="number" /></label>
+      </div>
+      <button id="btn-split">Podziel</button>
+      <pre id="out-split"></pre>
+      <p><small>Wynik to tablica. Dla prezentacji łączymy ją też z powrotem metodą <code>join(' | ')</code>.</small></p>
+    </section>
+
+    <!-- 8) charCodeAt -->
+    <section id="sec-ccode">
+      <h2>8) Kody znaków: <code>charCodeAt</code></h2>
+      <label>Tekst:
+        <input id="cc-tekst" type="text" value="ABC123" />
+      </label>
+      <button id="btn-ccode">Pokaż kody ASCII</button>
+      <pre id="out-ccode"></pre>
+      <p><small>Zakresy: A–Z = 65–90, a–z = 97–122, cyfry 0–9 = 48–57.</small></p>
+    </section>
+
+    <hr />
+    <p><small>Plik demonstracyjny: „Skrypty przetwarzające napisy — podstawy”.</small></p>
+  </body>
+</html>

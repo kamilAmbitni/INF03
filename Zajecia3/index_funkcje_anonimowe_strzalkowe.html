@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anonimowe funkcje — mini demo</title>
+  <script src="script_funkcje_anonimowe_strzalkowe.js" defer></script>
+</head>
+<body>
+  <h1>Funkcje anonimowe i arrow — najprostsze demo</h1>
+
+  <!-- 1) Anonimowa funkcja w zmiennej -->
+  <section>
+    <h2>1. Anonimowa funkcja w zmiennej</h2>
+    <button id="btn-czesc">powiedzCzesc()</button>
+  </section>
+
+  <!-- 2) Anonimowa funkcja jako handler kliknięcia -->
+  <section>
+    <h2>2. Handler: onclick vs addEventListener</h2>
+    <button id="przycisk-inline">Klik (onclick)</button>
+    <button id="przycisk-add">Klik (addEventListener)</button>
+  </section>
+
+  <!-- 3) forEach z funkcją anonimową -->
+  <section>
+    <h2>3. forEach + funkcja anonimowa</h2>
+    <ul id="lista-liczb"></ul>
+  </section>
+
+  <!-- 4) Funkcja strzałkowa (arrow) -->
+  <section>
+    <h2>4. Funkcja strzałkowa</h2>
+    <label>Imię: <input id="imie" value="Michał"></label>
+    <button id="btn-przywitaj-arrow">przywitaj (arrow)</button>
+  </section>
+
+  <!-- 5) Arrow jako handler (zmiana tła) -->
+  <section>
+    <h2>5. Arrow w handlerze — zmiana tła</h2>
+    <button id="btn-arrow-bg">Ustaw tło na lightblue</button>
+  </section>
+</body>
+</html>

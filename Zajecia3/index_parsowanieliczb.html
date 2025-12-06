@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JS — parsowanie liczb i obliczenia</title>
+  <meta name="description" content="Podstawy: parseFloat, parseInt, Number, unarny plus i isNaN w JavaScript" />
+  <script src="script_parsowanieliczb.js" defer></script>
+
+</head>
+<body>
+  <h1>Skrypty: obliczenia i parsowanie liczb w JS</h1>
+  <p>
+    Pamiętaj: wartości z <code>&lt;input&gt;</code> to <strong>teksty</strong>, nie liczby.
+    Żeby liczyć, trzeba je <em>zamienić</em> na liczby (parse). Tu masz najprostsze przykłady.
+  </p>
+
+  <!-- 1) Problem: + skleja teksty (bez parsowania) -->
+  <section>
+    <h2>1) Problem z typami: <code>+</code> skleja teksty</h2>
+    <label>a: <input id="a" type="text" value="5" /></label>
+    <label>b: <input id="b" type="number" value="7" /></label>
+    <div>
+      <button id="btn-bad-sum">Dodaj BEZ parsowania (źle)</button>
+      <button id="btn-clear-1">Wyczyść wynik</button>
+    </div>
+    <pre id="out-bad"></pre>
+    <p><small>Bez konwersji dostaniesz <strong>„57”</strong> zamiast <strong>12</strong>, bo <code>+</code> łączy teksty.</small></p>
+  </section>
+
+  <!-- 2) Poprawne sposoby dodawania -->
+  <section>
+    <h2>2) Poprawne dodawanie (różne konwersje)</h2>
+    <div>
+      <button id="btn-sum-parsefloat">parseFloat(a) + parseFloat(b)</button>
+      <button id="btn-sum-parseint">parseInt(a) + parseInt(b)</button>
+      <button id="btn-sum-number">Number(a) + Number(b)</button>
+      <button id="btn-sum-unary">(+a) + (+b)  (unarny plus)</button>
+      <button id="btn-sum-safe">Dodaj z walidacją isNaN()</button>
+      <button id="btn-clear-2">Wyczyść wynik</button>
+    </div>
+    <pre id="out-good"></pre>
+    <p>
+      <small>
+        <strong>parseFloat</strong> czyta też część ułamkową,
+        <strong>parseInt</strong> ucina do całkowitej,
+        <strong>Number</strong> jest rygorystyczny (cały tekst musi być liczbą),
+        <strong>+x</strong> działa jak Number(x).
+      </small>
+    </p>
+  </section>
+
+  <!-- 3) Mini kalkulator: -, *, / (z walidacją) -->
+  <section>
+    <h2>3) Mini kalkulator (z konwersją i walidacją)</h2>
+    <div>
+      <button id="btn-sub">a − b (odejmowanie)</button>
+      <button id="btn-mul">a × b (mnożenie)</button>
+      <button id="btn-div">a ÷ b (dzielenie)</button>
+      <button id="btn-clear-3">Wyczyść wynik</button>
+    </div>
+    <pre id="out-calc"></pre>
+  </section>
+
+  <!-- 4) Laboratorium parsowania pojedynczej wartości -->
+  <section>
+    <h2>4) Sprawdź jak parsuje: <code>parseInt</code>, <code>parseFloat</code>, <code>Number</code></h2>
+    <label>Wpisz tekst do konwersji: <input id="to-parse" type="text" placeholder='np.  "20.5px"  albo  "0037"  albo  "abc123"' /></label>
+    <div>
+      <button id="btn-test-parseint">Test: parseInt()</button>
+      <button id="btn-test-parsefloat">Test: parseFloat()</button>
+      <button id="btn-test-number">Test: Number()</button>
+      <button id="btn-clear-4">Wyczyść wynik</button>
+    </div>
+    <pre id="out-parse"></pre>
+    <p>
+      <small>
+        <strong>parseInt</strong> i <strong>parseFloat</strong> czytają „od lewej” tak długo, jak jest liczba (np. <code>"20px"</code> → 20 / 20.0).
+        <strong>Number</strong> próbuje zamienić <em>całość</em> — <code>"20px"</code> → <code>NaN</code>.
+      </small>
+    </p>
+  </section>
+
+  <hr />
+  <p><small>Tip: w liczbach używaj kropki jako separatora dziesiętnego (np. <code>3.14</code>).</small></p>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>INF.03 — Uchwyty DOM: proste przykłady</title>
+    <script src="script_DOM.js" defer></script>
+  </head>
+  <body>
+    <h1>Uchwyty elementów DOM — mini demo</h1>
+
+    <!-- getElementById -->
+    <section>
+      <h2>getElementById() — po identyfikatorze</h2>
+      <label
+        >Imię:
+        <input type="text" id="imie-id" placeholder="Wpisz swoje imię" />
+      </label>
+      <button onclick="pobierzImie()">Pobierz wartość</button>
+      <p id="wynik-id"></p>
+    </section>
+
+    <hr />
+
+    <!-- querySelector -->
+    <section>
+      <h2>querySelector() — pierwszy pasujący (CSS)</h2>
+      <p class="tekst-qsel">Akapit #1 klasy <code>tekst-qsel</code></p>
+      <p class="tekst-qsel">
+        Akapit #2 klasy <code>tekst-qsel</code> (zostanie pominięty)
+      </p>
+      <button onclick="zmienKolor()">
+        Zmień kolor na niebieski (tylko 1. akapit)
+      </button>
+    </section>
+
+    <hr />
+
+    <!-- querySelectorAll -->
+    <section>
+      <h2>querySelectorAll() — wiele pasujących (CSS)</h2>
+      <footer id="stopka-demo">
+        <a href="#">Polityka prywatności</a> | <a href="#">Regulamin</a> |
+        <a href="#">Kontakt</a>
+      </footer>
+      <div>
+        <button onclick="pokolorujLinkiStopki()">
+          Ustaw linki w stopce na szaro
+        </button>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- getElementsByTagName -->
+    <section id="sekcja-tag">
+      <h2>getElementsByTagName() — po nazwie znacznika</h2>
+      <input type="text" placeholder="Imię" />
+      <input type="text" placeholder="Nazwisko" />
+      <input type="text" placeholder="Miasto" />
+      <div>
+        <button onclick="pokazWszystkieInputy()">
+          Pokaż dane z wszystkich inputów
+        </button>
+        <button onclick="pokazNazwisko()">
+          Pokaż tylko nazwisko (drugi input)
+        </button>
+      </div>
+      <p id="wynik-tag"></p>
+    </section>
+
+    <hr />
+
+    <!-- getElementsByClassName -->
+    <section>
+      <h2>getElementsByClassName() — po klasie</h2>
+      <input type="text" class="pole" placeholder="Imię" />
+      <input type="text" class="pole" placeholder="Nazwisko" />
+      <input type="number" class="pole" placeholder="Wiek" />
+      <input type="text" placeholder="Miasto (bez klasy 'pole')" />
+      <div>
+        <button onclick="pokazWszystkie()">
+          Pokaż wartości pól z klasą 'pole'
+        </button>
+        <button onclick="pokazDrugi()">Pokaż wartość 2. pola z klasą</button>
+      </div>
+      <p id="wynik-klasa"></p>
+    </section>
+
+    <hr />
+
+    <!-- document.forms -->
+    <section>
+      <h2>document.forms — po nazwie formularza i name kontrolek</h2>
+      <form name="logowanie">
+        <input type="text" name="login" placeholder="Login" />
+        <input type="password" name="haslo" placeholder="Hasło" />
+        <button type="button" onclick="pokazDane()">Pokaż dane</button>
+      </form>
+      <p id="wynik-form"></p>
+    </section>
+
+    <hr />
+
+    <!-- Krótka ściąga -->
+    <!--
+    • getElementById(id) — 1 element po ID (unikalny)
+    • querySelector(sel) — 1. pasujący do selektora CSS
+    • querySelectorAll(sel) — lista (NodeList) wszystkich pasujących
+    • getElementsByTagName(tag) — kolekcja po nazwie tagu (HTMLCollection)
+    • getElementsByClassName(klasa) — kolekcja po klasie (HTMLCollection)
+    • document.forms['nazwa'] — formularz po atrybucie name, dalej kontrolki po name
+  --></body>
+</html>
