@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INF.02 - CSS (lekcja 2)</title>
+    <link rel="stylesheet" href="lekcja2.css" />
+  </head>
+  <body>
+    <header class="container">
+      <h1>INF.03 - CSS (lekcja 2)</h1>
+      <p class="muted">Zewnętrzny arkusz stylów, demonstracje</p>
+      <nav class="nav topic">
+        <a href="#s1">1. Selektory, właściwości, wartości, id vs class</a>
+        <a href="#s2">2. Podpinanie CSS + kaskada</a>
+        <a href="#s3">3. Zapisy kolorów</a>
+        <a href="#s4">4. Tekst i czcionki</a>
+        <a href="#s5">5. Wyśrodkowanie</a>
+        <a href="#s6">6. Box model (margin/padding)</a>
+        <a href="#s7">7. Linki (LVHA)</a>
+        <a href="#s8">8. Obramowania</a>
+        <a href="#s9">9. Tabele</a>
+        <a href="#s10">10. Listy</a>
+        <a href="#s11">11. Formularze</a>
+        <a href="#s12">12. Jednostki + calc</a>
+      </nav>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Przykład działania ::before i ::after</h2>
+        <p class="before-after">
+          To jest zwykły akapit, ale CSS dodał do niego ozdobniki przed i po
+          tekście - mimo że w HTML ich tu nie ma!
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Position relative oraz absolute</h2>
+        <div class="karta-relative">
+          <p>Treść karty</p>
+          <span class="etykieta-asbolute">Nowość!</span>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>position: fixed</h2>
+        <p>Ten przycisk pozostaje widoczny nawet podczas przewijania strony.</p>
+      </section>
+
+      <button class="btn-fixed">Pomoc</button>
+
+      <section class="card">
+        <h2>position: sticky</h2>
+        <p>
+          Przewiń stronę, a zobaczysz jak nagłówek "przykleja się" do górnej
+          krawędzi.
+        </p>
+
+        <div class="scroll-demo">
+          <h3 class="sticky-header">Nagłówek sekcji</h3>
+          <p>Tu jest dużo treści, żeby można było przewijać...</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+          <p>...</p>
+          <p>...i jeszcze więcej tekstu...</p>
+          <p>...i jeszcze więcej tekstu...</p>
+          <p>...i jeszcze więcej tekstu...</p>
+          <p>...i jeszcze więcej tekstu...</p>
+        </div>
+      </section>
+      <section class="card">
+        <h2>z-index</h2>
+        <div class="karta-relative">
+          <div class="box box1">Pierwszy (czerwony)</div>
+          <div class="box box2">Drugi (niebieski)</div>
+        </div>
+      </section>
+
+      <!-- 1) SELEKTORY, WŁAŚCIWOŚCI, WARTOŚCI, ID VS CLASS -->
+      <section id="s1" class="card">
+        <h2>1. Selektory, właściwości, wartości; identyfikator kontra klasa</h2>
+        <!-- Skrót treści: reguła CSS ma postać: selector { property: value; }.
+           Id (#) – unikalne; klasa (.) – wielokrotnego użytku; selektory tagów dla wszystkich elementów danego typu. -->
+        <div class="demo-grid">
+          <p class="note">
+            Przykład reguły: <code>p { color: #333; line-height: 1.6; }</code>
+          </p>
+          <p id="unikalny" class="naglowek">
+            #id ma większą specyficzność niż .klasa
+          </p>
+          <p class="naglowek highlight">.klasa może wystąpić wiele razy</p>
+        </div>
+      </section>
+
+      <!-- 2) PODPINANIE CSS + KASKADOWOŚĆ -->
+      <section id="s2" class="card">
+        <h2>2. Podpinanie CSS i kaskadowość</h2>
+        <!-- Zewnętrzny plik preferowany; wewnętrzny <style> tylko wyjątkowo; inline ma najwyższy priorytet.
+           Kaskada: inline > <style> > zewnętrzny (pomijając !important). -->
+        <div class="demo-grid">
+          <p>
+            Zewnętrzny arkusz:
+            <code>&lt;link rel="stylesheet" href="lekcja2.css"&gt;</code>
+          </p>
+          <p class="important-demo">
+            Uwaga na <code>!important</code> - używać rozważnie.
+          </p>
+        </div>
+      </section>
+
+      <!-- 3) ZAPISY KOLORÓW -->
+      <section id="s3" class="card">
+        <h2>3. Zapisy kolorów (HEX, RGB(A), HSL(A), nazwy, zmienne)</h2>
+        <div class="kolory">
+          <div class="kolor hex">HEX #58F</div>
+          <div class="kolor rgb">rgb(0,128,64)</div>
+          <div class="kolor rgba">rgba(255,0,0,.5)</div>
+          <div class="kolor hsl">hsl(200,100%,50%)</div>
+          <div class="kolor var">var(--kolor-glowny)</div>
+        </div>
+      </section>
+
+      <!-- 4) FORMATOWANIE TEKSTÓW I CZCIONEK -->
+      <section id="s4" class="card">
+        <h2>4. Formatowanie tekstów i czcionek</h2>
+        <div class="typography">
+          <p class="t1">Akapit bazowy (font-size, line-height).</p>
+          <p class="t2">
+            Grubość <strong>(font-weight:700)</strong>, kursywa
+            <em>(italic)</em>.
+          </p>
+          <p class="t3">
+            text-align: center • text-transform: uppercase • text-decoration.
+          </p>
+          <p class="t4">
+            letter-spacing i <span class="code">line-height</span> dla
+            czytelności.
+          </p>
+        </div>
+      </section>
+
+      <!-- 5) WYŚRODKOWANIE ELEMENTU -->
+      <section id="s5" class="card">
+        <h2>5. Wyśrodkowanie elementu</h2>
+        <div class="center-examples">
+          <div class="center-text">text-align: center</div>
+          <div class="center-block">Blok z <code>margin: 0 auto</code></div>
+          <div class="center-flex">Flex: justify-content + align-items</div>
+          <div class="center-abs">
+            <div class="center-abs-item">absolute + 50% + translate</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6) BOX MODEL: MARGIN I PADDING -->
+      <section id="s6" class="card">
+        <h2>6. Box model - margin i padding</h2>
+        <div class="boxmodel">
+          <div class="bm padding">padding</div>
+          <div class="bm margin">margin</div>
+          <div class="bm collapse">
+            <div class="mbox a">A (margin-bottom:100px)</div>
+            <div class="mbox b">B (margin-top:100px)</div>
+          </div>
+        </div>
+        <p class="muted">
+          Uwaga: pionowe marginesy sąsiadów nakładają się (przy równych
+          wartościach odstęp wyniesie 100px, nie 200px).
+        </p>
+      </section>
+
+      <!-- 7) STYLIZOWANIE LINKÓW -->
+      <section id="s7" class="card">
+        <h2>7. Stylizowanie linków (LVHA)</h2>
+        <p><a class="odnosnik1" href="#s7">Przykładowy link .odnosnik1</a></p>
+        <p><a class="btn" href="#s7">Link jako przycisk</a></p>
+        <p>
+          <a class="kafelek" href="#">
+            <img src="media/logoambitni.png" alt="miniatura" />
+          </a>
+        </p>
+      </section>
+
+      <!-- 8) OBRAMOWANIA -->
+      <section id="s8" class="card">
+        <h2>8. Obramowania (border, border-radius, border-image)</h2>
+        <div class="borders">
+          <div class="b b-solid">solid</div>
+          <div class="b b-dashed">dashed</div>
+          <div class="b b-dotted">dotted</div>
+          <div class="b b-double">double</div>
+          <div class="b b-radius">border-radius</div>
+        </div>
+        <p class="muted">
+          Wskazówka: <code>box-sizing: border-box</code> uwzględnia border w
+          szerokości.
+        </p>
+      </section>
+      <!-- 9) TABELE -->
+      <section id="s9" class="card">
+        <h2>9. Określanie wyglądu tabel</h2>
+        <div class="table-wrap">
+          <table class="t-demo">
+            <thead>
+              <tr>
+                <th>Imię</th>
+                <th>Wiek</th>
+                <th>Miasto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ala</td>
+                <td>21</td>
+                <td>Gdynia</td>
+              </tr>
+              <tr>
+                <td>Bartek</td>
+                <td>27</td>
+                <td>Kraków</td>
+              </tr>
+              <tr>
+                <td>Celia</td>
+                <td>30</td>
+                <td>Wrocław</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">
+          Naprzemienne wiersze: <code>tr:nth-child(even/odd)</code>. Pamiętaj:
+          mówimy o wierszach (rows), nie kolumnach.
+        </p>
+      </section>
+
+      <!-- 10) LISTY -->
+      <section id="s10" class="card">
+        <h2>10. Stylizowanie list punktowanych i numerowanych</h2>
+        <div class="lists">
+          <ul class="ul-a">
+            <li>disc</li>
+            <li>square</li>
+            <li>circle</li>
+          </ul>
+          <ol reversed class="ol-a">
+            <li>Pierwszy</li>
+            <li>Drugi</li>
+            <li>Trzeci</li>
+          </ol>
+          <ul class="wlasna-lista">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JS</li>
+          </ul>
+        </div>
+        <ul class="menu">
+          <li><a href="#s1">Start</a></li>
+          <li><a href="#s5">Wyśrodkowanie</a></li>
+          <li><a href="#s11">Formularze</a></li>
+        </ul>
+      </section>
+
+      <!-- 11) FORMULARZE -->
+      <section id="s11" class="card">
+        <h2>11. Stylizowanie kontrolek formularzy</h2>
+        <form class="formularz">
+          <label for="imie">Imię</label>
+          <input type="text" id="imie" name="imie" placeholder="np. Jan" />
+          <label for="haslo">Hasło</label>
+          <input type="password" id="haslo" name="haslo" />
+          <label for="mail">E-mail</label>
+          <input
+            type="email"
+            id="mail"
+            name="mail"
+            placeholder="np. jan@domena.pl"
+          />
+          <label
+            ><input type="checkbox" name="zgoda" /> Akceptuję regulamin</label
+          >
+          <div class="radios">
+            <label><input type="radio" name="plec" value="m" /> M</label>
+            <label><input type="radio" name="plec" value="k" /> K</label>
+          </div>
+          <label for="kraj">Kraj</label>
+          <select id="kraj" name="kraj">
+            <option>Polska</option>
+            <option>Niemcy</option>
+          </select>
+          <div class="actions">
+            <button type="button">Przycisk</button>
+            <input type="submit" value="Wyślij" />
+          </div>
+        </form>
+      </section>
+
+      <!-- 12) JEDNOSTKI + CALC -->
+      <section id="s12" class="card">
+        <h2>13. Jednostki w CSS + calc()</h2>
+        <div class="units">
+          <div class="u px">px</div>
+          <div class="u pct">50%</div>
+          <div class="u em">1.5em</div>
+          <div class="u rem">1.5rem</div>
+          <div class="u vh">30vh</div>
+          <div class="u vw">30vw</div>
+          <!-- p { line-height: 1.5; } 
+          div { z-index: 10; } 
+          img { opacity: 0.7; }  TE NIEWYMAGAJĄ JEDNOSTKI-->
+        </div>
+        <div class="calc-demo">Szerokość: calc(100% - 40px)</div>
+        <p class="muted">
+          Bezjednostkowe: <code>line-height: 1.5</code>,
+          <code>z-index: 10</code>, <code>opacity: .7</code>.
+        </p>
+      </section>
+
+      <br />
+      <br />
+    </main>
+  </body>
+</html>

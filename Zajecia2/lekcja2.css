@@ -1,0 +1,997 @@
+/* =====================================
+   lekcja2.css – zewnętrzny arkusz stylów (INF.03)
+   ===================================== */
+
+/* ===========================================================
+   USTAWIENIA GLOBALNE STRONY
+   -----------------------------------------------------------
+   * (gwiazdka) oznacza "wszystkie elementy" w dokumencie.
+   ::before oraz ::after to tzw. pseudoelementy — 
+   dodatkowe "wirtualne pudełka", które CSS może dodać 
+   przed lub po treści elementu (np. ozdobnik, ikonka, znak).
+
+   Właściwość box-sizing: border-box oznacza, że:
+   ➤ szerokość (width) i wysokość (height) elementu
+      będą zawierały w sobie padding (odstęp wewnętrzny)
+      i border (obramowanie).
+   ➤ dzięki temu element nie "puchnie" po dodaniu paddingu.
+   ➤ łatwiej jest projektować układ strony — szerokości
+      pozostają dokładnie takie, jakie wpiszemy w CSS.
+
+   Druga część (html, body) zeruje marginesy i odstępy,
+   ponieważ przeglądarka domyślnie dodaje je sama.
+   Ustawiamy więc margin: 0 i padding: 0, aby zacząć
+   projekt z „czystym płótnem”.
+   =========================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* Każda szerokość/wysokość obejmuje padding i border.
+  https://www.w3schools.com/css/tryit.asp?filename=trycss3_box-sizing_new */
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0; /* Usuwa domyślne marginesy przeglądarki. */
+}
+
+/* ===========================================================
+   PODSTAWOWE STYLE STRONY
+   -----------------------------------------------------------
+   Ustawienia fontu, koloru tekstu i tła strony.
+   Zmienne CSS (Custom Properties) zaczynają się od --,
+   a używa się ich przez var(--nazwa-zmiennej).
+   =========================================================== */
+:root {
+  --kolor-glowny: #2389cd; /* Zmienna: główny kolor motywu */
+  --tekst: #222; /* Zmienna: kolor tekstu */
+  --tlo: #fafafa; /* Zmienna: kolor tła strony */
+}
+
+/* ===========================================================
+   font-family – lista zapasowych czcionek (font stack)
+   -----------------------------------------------------------
+   ➤ Przeglądarka sprawdza fonty od lewej do prawej
+     i używa pierwszego, który jest dostępny w systemie użytkownika.
+
+   ➤ Nie są one łączone ani mieszane – działa zasada "pierwszy dostępny wygrywa".
+
+   ➤ Dzięki temu strona wygląda podobnie na różnych systemach:
+       - macOS / iPhone → -apple-system (San Francisco)
+       - Windows → "Segoe UI"
+       - Android → Roboto
+       - Jeśli nic nie znajdzie → Arial lub sans-serif
+
+   ➤ system-ui = uniwersalny alias dla domyślnego fonta systemowego.
+   =========================================================== */
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--tekst); /* Użycie zmiennej CSS */
+  background: var(--tlo); /* Użycie zmiennej CSS */
+  line-height: 1.6; /* Interlinia bez jednostki (unitless) – skaluje się z font-size. */
+}
+
+/* ===========================================================
+   🔹 Kontener główny strony
+   -----------------------------------------------------------
+   Ustawia maksymalną szerokość i wyśrodkowuje treść strony.
+   Dzięki temu cała zawartość nie "rozlewa się" po całym ekranie.
+   =========================================================== */
+.container {
+  max-width: 1000px; /* maksymalna szerokość kontenera – nie przekroczy 1000px */
+  margin: 0 auto; /* wyśrodkowanie elementu na stronie:
+                          0 = brak marginesu góra/dół,
+                          auto = automatyczne wyrównanie lewy/prawy */
+  padding: 0 1rem; /* wewnętrzny odstęp: 0 (góra/dół), 1rem (lewo/prawo)
+                          ➤ 1rem = jednostka względna = rozmiar bazowej czcionki (ok. 16px) */
+}
+
+/* ===========================================================
+   🔹 Nawigacja (spis treści / menu)
+   -----------------------------------------------------------
+   .nav.topic oznacza element z DWOMA klasami: "nav" i "topic".
+   Dzięki temu można go stylować tylko, gdy posiada obie.
+   =========================================================== */
+.nav.topic {
+  display: flex; /* aktywuje flexbox – elementy wewnętrzne (np. linki <a>) układają się w jednym rzędzie */
+  flex-wrap: wrap; /* jeśli elementy nie mieszczą się w jednym wierszu, 
+                             zostaną przeniesione do kolejnego (zawijanie wierszy) */
+  gap: 0.5rem 1rem; /* odstępy między elementami: 0.5rem w pionie, 1rem w poziomie */
+  margin: 1rem 0 0.5rem; /* marginesy: 1rem góra, 0 lewo/prawo, 0.5rem dół */
+}
+
+/* ===========================================================
+   🔹 Styl dla linków w nawigacji
+   -----------------------------------------------------------
+   .nav.topic a → odnosi się do WSZYSTKICH linków <a> wewnątrz elementu o klasach .nav i .topic.
+   =========================================================== */
+.nav.topic a {
+  text-decoration: none; /* usuwa podkreślenie z linków */
+  color: #0b63ce; /* kolor tekstu linku – niebieski */
+  padding: 0.15rem 0.3rem; /* wewnętrzny odstęp wokół tekstu linku */
+}
+
+/* ===========================================================
+   🔹 Styl po najechaniu myszką na link
+   -----------------------------------------------------------
+   .nav.topic a:hover → pseudoklasa :hover oznacza "stan po najechaniu".
+   =========================================================== */
+.nav.topic a:hover {
+  text-decoration: underline; /* pojawia się podkreślenie po najechaniu kursorem */
+}
+
+/* ===========================================================
+   🔹 Dodatkowa wiedza – inne wartości text-decoration:
+   -----------------------------------------------------------
+   text-decoration określa ozdobę tekstu. Dostępne wartości:
+     - none          → brak dekoracji
+     - underline     → podkreślenie
+     - overline      → linia nad tekstem
+     - line-through  → przekreślenie
+     - blink         → migający tekst (stara, niezalecana opcja)
+     - w połączeniu np.: underline overline → pod i nad tekstem
+   =========================================================== */
+
+/* Sekcje (karty) */
+.card {
+  background: #e9bdbd;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04); /* Delikatny cień */
+}
+
+/* ===========================================================
+   box-shadow – cień pod elementem
+   -----------------------------------------------------------
+   Składnia: box-shadow: offset-x offset-y blur-radius color;
+
+   ➤ offset-x: 0      → cień nie jest przesunięty w lewo/prawo
+   ➤ offset-y: 4px    → cień przesunięty 4px w dół (jakby światło z góry)
+   ➤ blur-radius: 18px → rozmycie cienia (im większe, tym bardziej miękki cień)
+   ➤ color: rgba(0,0,0,0.04) → czarny cień o niskiej przezroczystości (4%)
+
+   Efekt: delikatny, naturalny cień pod elementem.
+   =========================================================== */
+
+/* Stopka */
+.footer {
+  text-align: center;
+  color: #666;
+  padding: 2rem 0 3rem;
+}
+
+/* Drobny tekst i kod */
+.muted {
+  color: #666;
+}
+.code {
+  background: #f3f4f6;
+  padding: 0.12rem 0.35rem;
+  border-radius: 6px; /* zaokrąglone rogi */
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}
+
+/* ===========================================================
+   Jednostka rem vs px – czym się różnią?
+   -----------------------------------------------------------
+   ➤ px (piksel) to jednostka STAŁA (absolutna).
+      Oznacza dokładny rozmiar na ekranie – np. 16px to zawsze 16 pikseli.
+      Strona wygląda tak samo na każdym urządzeniu, 
+      ale nie skaluje się automatycznie przy powiększaniu tekstu przez użytkownika.
+
+   ➤ rem (root em) to jednostka WZGLĘDNA.
+      Oznacza wartość zależną od rozmiaru czcionki ustawionej
+      w głównym elemencie HTML (domyślnie 1rem = 16px).
+      Jeśli użytkownik lub projektant zmieni bazowy rozmiar tekstu,
+      to wszystkie elementy z wartościami w rem automatycznie się dopasują.
+
+   ➤ Dlatego rem jest bardziej elastyczny i polecany w nowoczesnych stronach:
+      - lepiej reaguje na ustawienia dostępności (np. większy tekst),
+      - ułatwia tworzenie responsywnych projektów.
+
+   Przykład poniżej:
+   font-size: 1.2rem → tekst 20% większy niż bazowy rozmiar strony (ok. 19.2px)
+   padding: 1rem     → odstęp wewnętrzny równy wysokości bazowej czcionki (np. 16px)
+   border-radius: 8px → zaokrąglenie rogów w pikselach (stała wartość)
+   =========================================================== */
+
+.before-after {
+  position: relative; /* umożliwia dokładniejsze pozycjonowanie pseudoelementów */
+  color: #333;
+  font-size: 1.2rem; /* rozmiar czcionki większy o 20% względem rozmiaru bazowego */
+  padding: 1rem; /* odstęp wewnętrzny równy 1 jednostce bazowej (rem) */
+  border: 2px solid #2389cd; /* obramowanie w pikselach – wartość stała */
+  border-radius: 8px; /* zaokrąglenie rogów w pikselach */
+}
+
+/* ::before – pojawia się PRZED zawartością elementu */
+.before-after::before {
+  content: "💡 Początek → ";
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* ::after – pojawia się PO zawartości elementu */
+.before-after::after {
+  content: " ← Koniec 💡";
+  color: #007bff;
+  font-weight: bold;
+}
+
+.before-after::before {
+  content: "";
+  display: block;
+  height: 10px;
+  background: red;
+}
+.before-after::after {
+  content: "";
+  display: block;
+  height: 10px;
+  background: blue;
+}
+
+/* ===========================================================
+   position: relative – pozycja względna
+   -----------------------------------------------------------
+   ➤ Element zachowuje swoje miejsce w układzie strony (flow),
+     ale można go delikatnie przesunąć względem jego
+     pierwotnego położenia za pomocą:
+       top, right, bottom, left.
+
+   ➤ Miejsce po nim NIE znika — inne elementy zachowują odstępy
+     tak, jakby ten element wciąż był na pierwotnej pozycji.
+
+   ➤ Często używamy position: relative, aby stworzyć
+     punkt odniesienia (tzw. "kontekst pozycjonowania")
+     dla elementów potomnych z position: absolute;
+     wtedy te wewnętrzne elementy ustawiają się względem
+     tego rodzica, a nie względem całej strony.
+   =========================================================== */
+
+.karta-relative {
+  position: relative; /* punkt odniesienia */
+  width: 300px;
+  height: 150px;
+  background: #e8f4ff;
+}
+
+/* ===========================================================
+   position: absolute – pozycja absolutna
+   -----------------------------------------------------------
+   ➤ Element zostaje „wyrwany” z normalnego układu strony.
+     Nie zajmuje już miejsca w przepływie (inne elementy 
+     zachowują się tak, jakby go nie było).
+
+   ➤ Można go precyzyjnie ustawić przy pomocy:
+       top, right, bottom, left.
+
+   ➤ Pozycjonowanie odbywa się względem:
+       - najbliższego przodka, który ma pozycję inną niż static 
+         (czyli np. relative, absolute, fixed, sticky)
+       - jeśli takiego przodka nie ma → względem całej strony (okna przeglądarki).
+
+   ➤ Często używane np. do etykiet, dymków, wysuwanych menu, 
+     nakładek graficznych, ikon, przycisków na obrazach itp.
+   =========================================================== */
+
+.etykieta-asbolute {
+  position: absolute; /* pozycjonowany względem .karta */
+  top: 10px; /* 10px od góry rodzica */
+  right: 10px; /* 10px od prawej rodzica */
+  background: red;
+  color: white;
+  padding: 4px 8px 4px 8px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+/* ===========================================================
+   zapis paddingu (i marginesów)
+   -----------------------------------------------------------
+   Kolejność wartości: GÓRA → PRAWO → DÓŁ → LEWO (zgodnie z zegarem 🕓)
+
+   padding: 4px 8px 4px 8px;
+   = góra 4px, prawo 8px, dół 4px, lewo 8px
+
+   padding: 4px 8px;
+   = góra i dół 4px, lewo i prawo 8px
+
+   =========================================================== */
+
+/* ===========================================================
+   position: fixed – element przyklejony do okna
+   -----------------------------------------------------------
+   ➤ Element zostaje „wyrwany” z układu strony (flow).
+   ➤ Zawsze pozostaje w tym samym miejscu na ekranie,
+     nawet podczas przewijania (scrollowania).
+   ➤ Pozycjonowany względem okna przeglądarki (viewportu),
+     nie względem żadnego rodzica.
+   ➤ Typowe zastosowania: pasek nawigacji, przycisk "Do góry",
+     ikona czatu, dymki pomocy.
+   =========================================================== */
+
+.btn-fixed {
+  position: fixed; /* element przyklejony do ekranu */
+  bottom: 20px; /* 20px od dolnej krawędzi okna */
+  left: 20px; /* 20px od prawej krawędzi */
+  background: #ff5722;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer; /* https://www.w3schools.com/cssref/tryit.php?filename=trycss_cursor */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ===========================================================
+   position: sticky – element przyklejający się do krawędzi
+   -----------------------------------------------------------
+   ➤ Na początku działa jak position: relative – przesuwa się razem z treścią.
+   ➤ Po dotarciu do określonej pozycji (np. top: 0)
+     „przykleja się” do tej krawędzi i zachowuje się jak fixed.
+   ➤ Działa tylko w obszarze przewijanego rodzica.
+   ➤ Często używane w:
+       - nagłówkach tabel i sekcji,
+       - paskach nawigacyjnych,
+       - etykietach przewijanych list.
+   =========================================================== */
+
+.scroll-demo {
+  height: 200px;
+  overflow-y: scroll; /* włącz przewijanie wewnątrz kontenera */
+  border: 1px solid #ccc;
+  padding: 0;
+}
+
+.sticky-header {
+  position: sticky; /* działa jak relative + fixed */
+  top: 0; /* przyklei się do górnej krawędzi kontenera */
+  background: #2389cd;
+  color: white;
+  padding: 0px;
+  font-weight: bold;
+  z-index: 8; /* trzyma nagłówek nad tekstem */
+}
+
+/* ===========================================================
+   display: flex – nowoczesny układ elementów
+   -----------------------------------------------------------
+   ➤ Zamienia element w "kontener flexowy" – jego dzieci
+     (elementy wewnętrzne) układają się elastycznie w jednym rzędzie.
+
+   ➤ justify-content: center
+     - wyrównuje elementy POZIOMO (oś główna)
+     - center = wyśrodkowanie, flex-start = w lewo, flex-end = w prawo
+
+   ➤ align-items: center
+     - wyrównuje elementy PIONOWO (oś poprzeczna)
+     - center = środek, flex-start = góra, flex-end = dół
+
+   ➤ Typowe zastosowania:
+     - wyśrodkowanie treści w pionie i poziomie
+     - układ menu, kart, przycisków, galerii itp.
+   =========================================================== */
+
+.box {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box1 {
+  background: crimson;
+  top: 40px;
+  left: 40px;
+  z-index: 4; /* niższa warstwa */
+}
+
+.box2 {
+  background: royalblue;
+  top: 70px;
+  left: 70px;
+  z-index: 3; /* wyższa warstwa */
+}
+
+/* ============================================================
+   1) SELEKTORY – ID (#), KLASA (.) i ich działanie
+   ============================================================ */
+
+/* 
+Selektor z # oznacza ID elementu (unikalny identyfikator).
+Można go użyć tylko raz w całym dokumencie HTML.
+*/
+#unikalny {
+  color: #1f3;
+}
+
+/* 
+Selektor z . oznacza klasę. 
+Może być przypisana do wielu elementów jednocześnie.
+Służy do grupowego stylowania podobnych fragmentów strony.
+*/
+.naglowek {
+  color: #06c; /* kolor tekstu – niebieski (#06c = skrócony zapis #0066cc) */
+}
+
+/* 
+Selektor .highlight to kolejna klasa – można ją łączyć z innymi.
+Nadaje elementowi tło, odstęp wewnętrzny i zaokrąglenie rogów.
+*/
+.highlight {
+  background: rgba(255, 230, 150, 0.6);
+  /* 
+     background – ustawia kolor tła elementu.
+     rgba() oznacza:
+       R – red (czerwony),
+       G – green (zielony),
+       B – blue (niebieski),
+       A – alpha (przezroczystość 0–1).
+     Wartości 255,230,150 tworzą jasnożółty kolor, 
+     a 0.6 oznacza 60% krycia (czyli lekko przezroczysty kolor tła).
+  */
+
+  padding: 0.15rem 0.3rem;
+  /* 
+     padding – to odstęp WEWNĘTRZNY (czyli przestrzeń między krawędzią elementu a jego zawartością).
+     Dzięki temu tekst nie „przykleja się” do brzegu.
+     
+     Dwie wartości: 
+       0.15rem – góra/dół,
+       0.3rem – lewo/prawo.
+     
+     Jednostka rem:
+       1rem = rozmiar czcionki elementu <html> (czyli rozmiar bazowy strony).
+       To jednostka relatywna – zmienia się, jeśli użytkownik powiększy tekst w przeglądarce.
+       Dzięki temu strona pozostaje bardziej dostępna i responsywna.
+  */
+
+  border-radius: 10px;
+  /* 
+     border-radius – zaokrąglenie rogów elementu.
+     Wartość 6px oznacza promień krzywizny w pikselach.
+     Jednostka px (piksel) to jednostka absolutna – nie zmienia się po powiększeniu strony.
+  */
+}
+
+/* 2) Kaskada i !important */
+.important-demo {
+  color: #b638b0 !important; /* !important ma najwyższy priorytet */
+}
+
+/* 3) Kolory */
+.kolory {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  gap: 0.5rem;
+}
+.kolor {
+  padding: 0.6rem;
+  border-radius: 8px;
+  color: #fff;
+  text-align: center;
+}
+
+/* ===========================================================
+   Różnica między .kolor.hex a .box + .box1
+   -----------------------------------------------------------
+   .kolor.hex → oznacza element, który MA JEDNOCZEŚNIE obie klasy:
+                  np. <div class="kolor hex"></div>
+                  Działa tylko wtedy, gdy obie klasy występują razem.
+
+   .box i .box1 → to dwie osobne klasy. Można ich używać niezależnie,
+                  ale często łączy się je w jednym elemencie, żeby:
+                  - .box nadawał wspólny wygląd (np. rozmiar, pozycję)
+                  - .box1 zmieniał szczegóły (np. kolor, położenie)
+   =========================================================== */
+
+.kolor.hex {
+  background: #58f;
+} /* Kolor HEX */
+.kolor.rgb {
+  background: rgb(0, 128, 64);
+} /* Kolor RGB */
+.kolor.rgba {
+  background: rgba(255, 0, 0, 0.2);
+  color: #000;
+} /* Kolor RGBA z przezroczystością */
+.kolor.hsl {
+  background: hsl(200, 100%, 50%);
+} /* Kolor HSL */
+.kolor.var {
+  background: var(--kolor-glowny);
+} /* Kolor ze zmiennej */
+
+/* 4) Typografia */
+
+/* ===========================================================
+   Różnica między .typography .t1 a .kolor.hex
+   -----------------------------------------------------------
+   .typography .t1  → SPACJA oznacza, że .t1 jest wewnątrz .typography
+                      (czyli element potomny / zagnieżdżony).
+                      np. <div class="typography"><p class="t1"></p></div>
+
+   .kolor.hex      → BRAK spacji oznacza, że element ma obie klasy naraz.
+                      np. <div class="kolor hex"></div>
+
+   ➤ SPACJA = relacja rodzic–dziecko (potomek)
+   ➤ BRAK SPACJI = ten sam element ma kilka klas
+   =========================================================== */
+
+.typography .t1 {
+  font-size: 1rem;
+  line-height: 1.6;
+} /* Akapit bazowy */
+.typography .t2 {
+  font-weight: 700;
+  font-style: italic;
+} /* Pogrubienie i kursywa */
+.typography .t3 {
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration: underline wavy;
+} /* Duże litery + podkreślenie */
+.typography .t4 {
+  letter-spacing: 0.04em;
+  line-height: 1.8;
+} /* Odstępy między literami */
+
+/* 5) Wyśrodkowanie elementów */
+.center-text {
+  text-align: center;
+  padding: 0.5rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+.center-block {
+  width: 320px;
+  margin: 0 auto; /* automatyczne wyrównanie lewy/prawy */
+  padding: 0.6rem;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+}
+.center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 10px dashed #bbb;
+  height: 120px;
+  border-radius: 8px;
+}
+/* ===========================================================
+   .center-abs – kontener (rodzic)
+   -----------------------------------------------------------
+   Ustawiamy element jako obszar, względem którego będziemy
+   pozycjonować element wewnętrzny (.center-abs-item).
+   =========================================================== */
+.center-abs {
+  position: relative; /* ➤ tworzy kontekst pozycjonowania dla elementów "absolute" wewnątrz */
+  height: 140px; /* ➤ ustala wysokość całego obszaru (bez niej nic by się nie pokazało) */
+  border: 1px solid #ddd; /* ➤ cienka ramka kontenera */
+  border-radius: 8px; /* ➤ zaokrąglenie rogów (estetyka) */
+}
+
+/* ===========================================================
+   .center-abs-item – element wewnętrzny (dziecko)
+   -----------------------------------------------------------
+   Ten element ma zostać wyśrodkowany względem swojego rodzica.
+   Wykorzystujemy pozycjonowanie absolutne i transformację.
+   =========================================================== */
+.center-abs-item {
+  position: absolute; /* ➤ pozycjonuje element względem najbliższego rodzica z position: relative */
+  top: 50%; /* ➤ przesuwa górną krawędź elementu na 50% wysokości rodzica */
+  left: 50%; /* ➤ przesuwa lewą krawędź elementu na 50% szerokości rodzica */
+  transform: translate(-50%, -50%);
+  /* ➤ przesuwa element w górę i w lewo o połowę jego własnej szerokości i wysokości,
+       dzięki czemu element jest idealnie WYŚRODKOWANY (zarówno w pionie, jak i poziomie) */
+
+  background: #ffe; /* ➤ jasnożółte tło dla kontrastu */
+  border: 1px solid #cc9; /* ➤ delikatna ramka w podobnym odcieniu */
+  padding: 0.4rem 0.6rem; /* ➤ odstęp wewnętrzny (tekst nie klei się do krawędzi) */
+  border-radius: 8px; /* ➤ zaokrąglenie rogów */
+}
+
+/* 6) Box model */
+.bm.padding {
+  background: #e7f5ff;
+  border: 1px solid #74c0fc;
+  padding: 10px 20px; /* odstęp wewnętrzny: góra/dół = 10px, lewo/p */
+} /* padding – odstęp wewnętrzny */
+.bm.margin {
+  background: #fff4e6;
+  border: 1px solid #ffa94d;
+  margin: 0.5rem 0; /* odstęp zewnętrzny: góra/dół = 0.5rem, lewo/prawo = 0 */
+} /* margin – odstęp zewnętrzny */
+.mbox.a {
+  margin-bottom: 100px;
+} /* dolny margines */
+.mbox.b {
+  margin-top: 100px;
+} /* górny margines */
+
+/* 7) Linki LVHA */
+/* ===========================================================
+   Stylizowanie linków w różnych stanach
+   -----------------------------------------------------------
+   :link     → link nieodwiedzony
+   :visited  → link, który był już odwiedzony
+   :hover    → efekt po najechaniu kursorem
+   :active   → chwilowy efekt podczas kliknięcia
+   =========================================================== */
+
+a.odnosnik1:link {
+  color: green; /* kolor linku nieodwiedzonego */
+  text-decoration: underline; /* podkreślenie tekstu */
+}
+
+a.odnosnik1:visited {
+  color: pink; /* kolor po odwiedzeniu linku */
+}
+
+a.odnosnik1:hover {
+  color: blue; /* zmiana koloru po najechaniu */
+}
+
+a.odnosnik1:active {
+  color: red; /* kolor podczas klikania */
+}
+
+/* ===========================================================
+   Przycisk w formie linka
+   -----------------------------------------------------------
+   Zmienia wygląd zwykłego <a> w estetyczny przycisk.
+   =========================================================== */
+a.btn {
+  display: inline-block; /* ➤ dzięki temu element <a> zachowuje się jak połączenie:
+                              - inline → można go ustawiać w linii z innymi,
+                              - block → można nadać mu wymiary (padding, margin, szerokość)
+                              dzięki temu możemy stylować link jak przycisk */
+  padding: 0.5rem 0.9rem; /* ➤ odstęp wewnętrzny: góra/dół 0.5rem, lewo/prawo 0.9rem */
+  background: #0d6efd; /* ➤ kolor tła (niebieski) */
+  color: #fff; /* ➤ biały kolor tekstu */
+  text-decoration: none; /* ➤ usuwa domyślne podkreślenie linku */
+  border-radius: 8px; /* ➤ zaokrągla rogi przycisku */
+}
+
+a.btn:hover {
+  filter: brightness(1.08); /* ➤ lekkie rozjaśnienie przycisku po najechaniu */
+}
+
+/* ===========================================================
+    Link na obrazku (efekt po najechaniu)
+   -----------------------------------------------------------
+   Stylizujemy obrazek wewnątrz elementu z klasą .kafelek,
+   np. <a class="kafelek"><img src="..."></a>
+   =========================================================== */
+
+.kafelek img {
+  display: block; /* ➤ eliminuje odstępy pod obrazkiem (bo <img> domyślnie jest inline) */
+  width: 200px; /* ➤ szerokość obrazka */
+  height: 200px; /* ➤ wysokość obrazka */
+  object-fit: cover; /* ➤ przycina obraz, zachowując proporcje (bez rozciągania) */
+  border-radius: 6px; /* ➤ lekko zaokrągla rogi obrazka */
+  transition: all 0.25s ease; /* ➤ płynne przejście przy zmianie stylu (efekt hover) */
+}
+
+/* Efekt po najechaniu kursorem */
+.kafelek img:hover {
+  opacity: 0.85; /* ➤ lekko przyciemnia obraz (zmniejsza jego przezroczystość) */
+  transform: scale(1.04); /* ➤ delikatnie powiększa obraz (efekt "zoom in") */
+}
+
+/* ===========================================================
+   8) Obramowania – różne style linii i zaokrąglenia rogów
+   -----------------------------------------------------------
+   Sekcja pokazuje różne typy właściwości 'border' i 'border-radius'.
+   =========================================================== */
+
+/* Główny kontener dla przykładów obramowań */
+.borders {
+  display: grid; /* ➤ użycie siatki (grid) do rozmieszczenia przykładów */
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  /* ➤ 5 kolumn – każda ma min. 120px, a jeśli jest miejsce, rozciąga się równomiernie */
+  gap: 0.6rem; /* ➤ odstęp między komórkami siatki */
+}
+
+/* ===========================================================
+   grid-template-columns: repeat(5, minmax(120px, 1fr));
+   -----------------------------------------------------------
+   ➤ Tworzy 5 kolumn w siatce (CSS Grid).
+
+   - repeat(5, ...)   → powtórz 5 razy ten sam wzór kolumny
+   - minmax(120px, 1fr)
+       • min  = 120px  → kolumna nie będzie węższa niż 120px
+       • max  = 1fr    → kolumna może rozszerzać się proporcjonalnie
+                         do dostępnego miejsca w kontenerze
+
+   💡 Jednostka "fr" = fraction (ułamek, część wolnej przestrzeni)
+      - 1fr oznacza 1 część całej dostępnej szerokości
+      - np. 1fr 2fr 1fr → kolumny w proporcjach 25% / 50% / 25%
+   =========================================================== */
+
+/* Wspólny wygląd dla wszystkich pól z obramowaniem */
+.b {
+  text-align: center; /* ➤ tekst wyśrodkowany */
+  padding: 0.8rem; /* ➤ odstęp wewnętrzny od krawędzi */
+  border-radius: 8px; /* ➤ lekkie zaokrąglenie rogów (dla estetyki) */
+  background: #f9fafb; /* ➤ jasne tło, żeby lepiej było widać ramkę */
+}
+
+/* Różne style obramowań: */
+
+/* Ciągła linia (solid) */
+.b-solid {
+  border: 3px solid #111; /* ➤ pełna, czarna linia o grubości 3px */
+}
+
+/* Linia przerywana (dashed) */
+.b-dashed {
+  border: 3px dashed #0b63ce; /* ➤ przerywana linia w kolorze niebieskim */
+}
+
+/* Linia kropkowana (dotted) */
+.b-dotted {
+  border: 3px dotted #22aa66; /* ➤ zielone kropki zamiast ciągłej linii */
+}
+
+/* Linia podwójna (double) */
+.b-double {
+  border: 6px double #c33; /* ➤ czerwona podwójna linia o łącznej grubości 6px */
+}
+
+/* Zaokrąglone obramowanie */
+.b-radius {
+  border: 2px solid #444; /* ➤ ciemnoszara linia */
+  border-radius: 18px; /* ➤ wyraźnie zaokrąglone rogi */
+} /* Zaokrąglone rogi */
+
+/* ===========================================================
+   9) Stylizowanie tabeli (.t-demo)
+   -----------------------------------------------------------
+   Przykład pokazuje, jak:
+   - scalać obramowania komórek,
+   - ustawić jednolite marginesy,
+   - wyróżnić nagłówek i co drugi wiersz.
+   =========================================================== */
+
+.t-demo {
+  border-collapse: collapse; /* ➤ łączy (scala) sąsiadujące obramowania komórek.
+                                Bez tego widać podwójne linie między td/th. */
+  width: 100%; /* ➤ tabela zajmuje pełną szerokość kontenera */
+}
+
+/* Styl wspólny dla wszystkich komórek – nagłówków (th) i danych (td) */
+.t-demo th,
+.t-demo td {
+  border: 1px solid #cbd5e1; /* ➤ cienka, jasna ramka wokół każdej komórki */
+  padding: 1.5rem 0.6rem; /* ➤ odstęp wewnętrzny (czytelniejszy tekst) */
+  text-align: left; /* ➤ wyrównanie zawartości do lewej */
+}
+
+/* Styl dla nagłówka tabeli (wiersz <thead>) */
+.t-demo thead th {
+  background: #146ac0; /* ➤ jasnoszare tło nagłówka tabeli */
+}
+
+/* Wyróżnienie co drugiego wiersza w części <tbody> */
+/* ===========================================================
+   🔹 :nth-child(even)
+   -----------------------------------------------------------
+   ➤ Selektor pseudo-klasy, który wybiera co drugi wiersz tabeli:
+       - even  → parzyste (2, 4, 6, 8, ...)
+       - odd   → nieparzyste (1, 3, 5, 7, ...)
+
+   ➤ Tutaj nadajemy tło (#89cc8d) tylko dla wierszy parzystych
+     w sekcji <tbody> tabeli .t-demo.
+
+   Efekt: tzw. "zebra striping" – naprzemienne kolory wierszy,
+   co poprawia czytelność danych w tabeli.
+   =========================================================== */
+.t-demo tbody tr:nth-child(odd) {
+  background: #89cc8d; /* zielone tło dla wierszy parzystych (2,4,6...) */
+}
+
+/* ===========================================================
+   🔹 10) Listy – własne znaczniki i poziome menu
+   -----------------------------------------------------------
+   Dwa przykłady:
+   1) .wlasna-lista – lista z ikonami zamiast domyślnych punktorów
+   2) .menu – lista pozioma użyta jako nawigacja
+   =========================================================== */
+
+/* 1️⃣ Lista z własnymi znacznikami */
+.wlasna-lista {
+  list-style: none; /* ➤ usuwa domyślne wypunktowanie (kropki, kwadraty) */
+  padding-left: 0; /* ➤ usuwa domyślne wcięcie listy */
+}
+
+/* Dodanie własnego "punktora" przed każdym elementem listy */
+.wlasna-lista li::before {
+  content: "✔"; /* ➤ dodaje znacznik przed każdym <li> (tutaj "ptaszek") */
+  color: green; /* ➤ kolor znacznika */
+  margin-right: 0.5rem; /* ➤ odstęp między znacznikiem a tekstem */
+} /* własny znacznik listy */
+
+/* 2️⃣ Menu poziome na bazie listy */
+.menu {
+  list-style: none; /* ➤ usuwa domyślne wypunktowanie */
+  margin: 0; /* ➤ reset marginesu (usuwa domyślne odstępy przeglądarki) */
+  padding: 0; /* ➤ reset wcięcia */
+  background: #333; /* ➤ ciemne tło belki menu */
+  display: flex; /* ➤ ustawia elementy <li> obok siebie w jednym rzędzie */
+  justify-content: center; /* ➤ wyśrodkowuje elementy w poziomie */
+}
+
+/* Styl dla linków wewnątrz menu */
+.menu a {
+  color: #fff; /* ➤ biały kolor tekstu */
+  text-decoration: none; /* ➤ usuwa podkreślenie */
+  padding: 0.7rem 1.2rem; /* ➤ odstęp wewnętrzny – "klikowalna" powierzchnia */
+}
+
+/* Efekt po najechaniu myszką na link */
+.menu a:hover {
+  background: #555; /* ➤ lekko jaśniejsze tło po najechaniu kursorem */
+} /* efekt na hover */
+
+/* ===========================================================
+   🔹 Stylizowanie list z klasami .ul-a i .ol-a
+   -----------------------------------------------------------
+   Pokazuje zmianę wyglądu wypunktowania i numeracji.
+   =========================================================== */
+
+/* Lista nieuporządkowana (ul) – zmiana kropek na kwadraty */
+.ul-a {
+  list-style-type: square; /* ➤ zamienia domyślną kropkę (disc) na kwadrat */
+  padding-left: 1.5rem; /* ➤ wcięcie od lewej, żeby znaczniki były widoczne */
+  color: #222; /* ➤ kolor tekstu */
+  font-family: Arial, sans-serif;
+}
+
+/* Lista uporządkowana (ol) – zmiana stylu numeracji */
+.ol-a {
+  list-style-type: upper-roman; /* ➤ zamiast cyfr arabskich (1,2,3) – cyfry rzymskie (I, II, III) */
+  padding-left: 1.5rem;
+  color: #0b63ce; /* ➤ niebieski tekst dla wyróżnienia */
+  font-family: Arial, sans-serif;
+}
+
+/* ===========================================================
+   11) Formularze – stylizowanie kontrolek i przycisków
+   -----------------------------------------------------------
+   Pokazuje, jak ostylować różne elementy formularza:
+   etykiety, pola tekstowe, hasła, e-maile, checkboxy,
+   przyciski oraz listy rozwijane.
+   =========================================================== */
+
+/* Etykieta (label) – opis pola formularza */
+.formularz label {
+  font-weight: 800; /* ➤ pogrubienie tekstu etykiety */
+  display: block; /* ➤ każda etykieta w osobnej linii */
+  margin-bottom: 1.1rem; /* ➤ odstęp pod etykietą */
+}
+
+/* Pola tekstowe: imię, hasło, e-mail */
+.formularz input[type="text"],
+.formularz input[type="password"],
+.formularz input[type="email"] {
+  border: 2px solid #007bff; /* ➤ niebieska ramka pola */
+  padding: 0.5rem 0.6rem; /* ➤ odstęp wewnętrzny od tekstu */
+  border-radius: 6px; /* ➤ lekko zaokrąglone rogi */
+  font-size: 16px; /* ➤ wielkość czcionki */
+}
+
+/* Pole hasła (password) – osobny styl, inny kolor i styl obramowania */
+.formularz input[type="password"] {
+  border-style: dashed; /* ➤ obramowanie przerywane */
+  border-color: #dc3545; /* ➤ czerwony kolor ramki */
+}
+
+/* Pole e-mail – efekt po kliknięciu (focus) */
+.formularz input[type="email"]:focus {
+  outline: none; /* ➤ usuwa domyślną niebieską obwódkę */
+  border-color: #6610f2; /* ➤ fioletowa ramka przy aktywnym polu */
+  box-shadow: 0 0 5px #6610f2; /* ➤ delikatna poświata wokół pola */
+}
+
+/* Checkbox (kwadrat do zaznaczania) */
+.formularz input[type="checkbox"] {
+  width: 18px; /* ➤ rozmiar pola wyboru */
+  height: 18px;
+  accent-color: #28a745; /* ➤ kolor zaznaczenia (zielony) */
+}
+
+/* Radio button (okrągły przycisk wyboru) */
+.formularz input[type="radio"] {
+  width: 18px; /* ➤ rozmiar przycisku */
+  height: 18px;
+  accent-color: #ffc107; /* ➤ kolor zaznaczenia (żółty) */
+}
+
+/* Lista rozwijana (select) */
+.formularz select {
+  padding: 0.5rem; /* ➤ odstęp wewnętrzny */
+  font-size: 16px; /* ➤ wielkość czcionki */
+  border: 2px solid #17a2b8; /* ➤ niebiesko-zielona ramka */
+  border-radius: 6px; /* ➤ zaokrąglone rogi */
+}
+
+/* Przycisk (button) i przycisk wysyłania formularza (submit) */
+.formularz button,
+.formularz input[type="submit"] {
+  background: #007bff; /* ➤ niebieskie tło przycisku */
+  color: #fff; /* ➤ biały tekst */
+  padding: 0.6rem 1rem; /* ➤ odstęp wewnętrzny */
+  border: none; /* ➤ brak obramowania */
+  border-radius: 8px; /* ➤ zaokrąglone rogi */
+  font-size: 16px; /* ➤ rozmiar tekstu */
+  cursor: pointer; /* ➤ zmienia kursor na „rączkę” po najechaniu */
+}
+
+/* Efekt po najechaniu myszką na przycisk */
+.formularz button:hover,
+.formularz input[type="submit"]:hover {
+  filter: brightness(1.08); /* ➤ lekkie rozjaśnienie tła */
+} /* efekt hover */
+
+/* ===========================================================
+   🔹 12) Jednostki w CSS + funkcja calc()
+   -----------------------------------------------------------
+   Przykłady użycia różnych jednostek: px, %, em, rem, vw, vh
+   oraz praktyczne zastosowanie funkcji calc().
+   =========================================================== */
+
+/* ➤ Szerokość w pikselach (jednostka absolutna) */
+.u.px {
+  width: 200px; /* ➤ stała szerokość – niezależna od ekranu */
+}
+
+/* ➤ Szerokość w procentach (jednostka relatywna) */
+.u.pct {
+  width: 50%; /* ➤ zajmuje połowę szerokości rodzica */
+}
+
+/* ➤ Rozmiar czcionki relatywny do elementu nadrzędnego */
+.u.em {
+  font-size: 1.5em; /* ➤ 1em = rozmiar czcionki rodzica; 1.5em = 150% */
+}
+
+/* ➤ Rozmiar czcionki względem całego dokumentu (elementu <html>) */
+.u.rem {
+  font-size: 1.5rem; /* ➤ 1rem = rozmiar czcionki ustawiony w <html> */
+}
+
+/* ➤ Wysokość zależna od okna przeglądarki */
+.u.vh {
+  height: 30vh; /* ➤ 30% wysokości okna (viewport height) */
+}
+
+/* ➤ Szerokość zależna od okna przeglądarki */
+.u.vw {
+  width: 30vw; /* ➤ 30% szerokości okna (viewport width) */
+}
+
+/* ➤ Użycie funkcji calc() do łączenia jednostek */
+.calc-demo {
+  width: calc(
+    100% - 40px
+  ); /* ➤ szerokość = 100% rodzica minus 40px marginesu */
+  padding: 0.6rem; /* ➤ odstęp wewnętrzny (rem – relatywny do <html>) */
+  border: 1px dashed #bbb; /* ➤ przerywana ramka do pokazania granic */
+  border-radius: 8px; /* ➤ lekko zaokrąglone rogi */
+  background: #f8fafc; /* ➤ jasne tło dla kontrastu */
+}
