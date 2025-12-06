@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!--
+Deklaracja typu dokumentu (DOCTYPE) informuje przeglądarkę,
+że używamy najnowszej wersji standardu HTML5.
+-->
+<html lang="pl">
+  <!--
+Znacznik <html> otacza cały dokument HTML.
+Atrybut lang określa język zawartości strony.
+Tutaj "pl" oznacza język polski.
+-->
+  <head>
+    <!-- Sekcja <head> zawiera informacje o stronie (meta dane, tytuł, style, skrypty itp.) -->
+    <meta charset="UTF-8" />
+    <!--
+  Ustawienie kodowania znaków – "utf-8" pozwala poprawnie wyświetlać polskie znaki (ą, ę, ś, ć itd.).
+  Ten znacznik powinien znajdować się na początku sekcji <head>.
+  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+  Zapewnia poprawne skalowanie strony na różnych urządzeniach (telefon, tablet, komputer).
+  width=device-width – szerokość strony dopasowuje się do szerokości ekranu.
+  initial-scale=1.0 – strona nie jest pomniejszana ani powiększana przy ładowaniu.
+  -->
+    <title>Lekcja1 html</title>
+    <!--
+  Zawartość <title> pojawia się w karcie przeglądarki oraz w wynikach wyszukiwania Google.
+  -->
+    <meta
+      name="description"
+      content="Kurs HTML i CSS dla początkujących - przykłady i ćwiczenia."
+    />
+    <!--
+  Atrybut "description" to krótki opis treści strony. Wpływa na SEO (pozycjonowanie).
+  -->
+    <meta name="author" content="Jan Programista" />
+    <!--
+  Informacja o autorze dokumentu. Może być imię i nazwisko lub nazwa firmy.
+  -->
+    <link rel="icon" href="favicon.png" />
+    <!--
+  Ustawia ikonę strony (favicon) widoczną na karcie przeglądarki.
+  Atrybut "href" wskazuje lokalizację pliku graficznego.
+  -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!--
+  Łączenie z zewnętrznym arkuszem stylów CSS.
+  "rel" określa typ powiązania (stylesheet = arkusz stylów),
+  a "href" wskazuje ścieżkę do pliku CSS.
+  -->
+    <style>
+      mark {
+        background-color: red;
+      }
+    </style>
+
+    <script src="script.js"></script>
+    <!--
+  Łączenie z zewnętrznym plikiem JavaScript.
+  Atrybut "src" wskazuje ścieżkę do skryptu.
+  Skrypt doda interaktywność stronie (późniejsze lekcje).
+  --></head>
+  <body>
+    <header>
+      <!--
+  Znacznik <header> to nagłówek strony lub sekcji.
+  Często zawiera tytuł, logo lub menu nawigacyjne.
+  -->
+      <h1>Witaj w kursie HTML i CSS!</h1>
+      <!--
+  <h1> – główny nagłówek strony. Powinien występować tylko raz w dokumencie.
+  -->
+      <p>To jest przykładowa strona stworzona na potrzeby lekcji.</p>
+    </header>
+    <nav>
+      <!--
+  <nav> – sekcja nawigacyjna strony.
+  Zawiera listę odnośników prowadzących do konkretnych miejsc (kotwic) w bieżącym dokumencie.
+  Kliknięcie w link przewija stronę do elementu z odpowiadającym mu atrybutem id="...".
+  -->
+      <h2>Spis treści</h2>
+      <ul>
+        <li><a href="#sekcja-paragrafy">Pragrafy</a></li>
+        <li><a href="#linki">Przykłady odnośników</a></li>
+        <li><a href="#sekcja-listy">Listy w HTML</a></li>
+      </ul>
+
+      <!--
+  Każdy <a href="#..."> wskazuje na element z identyfikatorem id="...".
+  Poniżej (w treści) dopisaliśmy niewidoczne znaczniki <span id="..."></span> w odpowiednich miejscach,
+  aby utworzyć cele nawigacji bez zmiany istniejącej struktury.
+  -->
+    </nav>
+    <main>
+      <!--
+  <main> zawiera główną zawartość strony (unikalną dla tej podstrony).
+  -->
+      <span id="sekcja-paragrafy"></span>
+      <!--
+  Niewidoczna "kotwica" (cel nawigacji) – to tutaj przewinie strona po kliknięciu w link "Paragrafy".
+  Użyliśmy <span> z id, by nie modyfikować istniejących nagłówków/struktur.
+  -->
+      <p>To jest pierwszy akapit tekstu, który pojawi się na stronie.</p>
+      <!--
+  <p> oznacza paragraf (akapit).
+  Każdy akapit zaczyna się w nowej linii i ma automatycznie dodany odstęp.
+  -->
+      <p>
+        Uczę się <strong>HTML</strong> i <em>CSS</em>. To jest
+        <mark>ważna</mark> informacja!
+      </p>
+      <p><small>To jest przypis drobnym drukiem.</small></p>
+      <!--
+  <strong> – mocne wyróżnienie (zazwyczaj pogrubienie).
+  <em> – wyróżnienie, zwykle kursywa.
+  <mark> – zaznaczenie fragmentu tekstu (jak żółtym markerem).
+  <small> – mniejszy rozmiar czcionki (np. przypis).
+  -->
+      <h2 id="linki">Przykłady odnośników</h2>
+      <!--
+  <h2> – nagłówek drugiego poziomu. Używamy ich do porządkowania treści.
+  Atrybut id="linki" pozwala tworzyć odnośniki do tej sekcji (linki wewnętrzne).
+  -->
+      <p><a href="https://www.example.com">Przejdź do Example.com</a></p>
+      <!--
+  <a> – link (odnośnik).
+  Atrybut "href" określa adres strony, do której prowadzi link.
+  Tekst pomiędzy znacznikami <a> to widoczna treść linku.
+  -->
+      <p>
+        <a href="https://www.ambitni.edu.pl/" target="_blank"
+          >Otwórz w nowej karcie</a
+        >
+      </p>
+      <!--
+  Atrybut target="_blank" otwiera link w nowej karcie przeglądarki.
+  -->
+      <p><a href="instrukcja.pdf" download>Pobierz instrukcję</a></p>
+      <!--
+  Atrybut download powoduje, że po kliknięciu link pobiera wskazany plik zamiast otwierania go w przeglądarce.
+  -->
+      <p><a href="#kontakt">Przejdź do sekcji Kontakt</a></p>
+      <!--
+  Link wewnętrzny (kotwica). Atrybut href="#kontakt" wskazuje na element z identyfikatorem "kontakt".
+  Po kliknięciu strona przewija się do tego miejsca.
+  -->
+
+      <h2>Listy w HTML</h2>
+      <span id="sekcja-listy"></span>
+      <h3>Lista punktowana</h3>
+      <!--
+<ul> – lista nieuporządkowana (punktowana).
+<ol> – lista uporządkowana (numerowana).
+<li> – pojedynczy element listy.
+-->
+      <ul>
+        <li>Pierwszy punkt</li>
+        <li>Drugi punkt</li>
+        <li>Trzeci punkt</li>
+      </ul>
+      <ol>
+        <li>Pierwszy punkt</li>
+        <li>Drugi punkt</li>
+        <li>Trzeci punkt</li>
+      </ol>
+      <h3>Lista definicji</h3>
+      <dl>
+        <!--
+  <dl> – lista definicji (definition list),
+  <dt> – termin (definition term),
+  <dd> – opis (definition description).
+  -->
+        <dt>HTML</dt>
+        <dd>Język znaczników do tworzenia stron internetowych.</dd>
+        <dt>CSS</dt>
+        <dd>Arkusz stylów do formatowania wyglądu stron.</dd>
+        <dt>JavaScript</dt>
+        <dd>
+          Język programowania do tworzenia interaktywnych elementów na stronach.
+        </dd>
+      </dl>
+
+      <section>
+        <!--
+    <section> – wyodrębniony fragment strony dotyczący jednego tematu.
+    W tym przypadku sekcja kontaktu.
+    -->
+        <h2 id="kontakt">Kontakt</h2>
+        <p>
+          Masz pytania? Napisz do nas na
+          <a href="mailto:kontakt@ambitni.edu.pl">mail kontaktowy</a>
+        </p>
+        <!--
+    Atrybut href="mailto:" w linku powoduje otwarcie domyślnego programu pocztowego
+    z wypełnionym adresem e-mail.
+    -->
+      </section>
+
+      <footer>
+        <!--
+  <footer> – stopka strony.
+  Zawiera informacje o autorze, prawach autorskich, dacie itp.
+  -->
+        <p>&copy;Jan Nowak</p>
+        <!--
+  &copy; to symbol © (copyright) – oznaczenie praw autorskich.
+  -->
+        <p>
+          Data egzaminu: <time datetime="2026-01-15">15 stycznia 2026</time>
+        </p>
+        <!--
+  <time> – znacznik semantyczny do oznaczania dat i godzin.
+  Atrybut datetime zawiera datę w formacie ISO (maszynowym).
+  Wewnątrz znacznika znajduje się wersja widoczna dla użytkownika.
+  -->
+      </footer>
+
+      <br /><br /><br /><br /><br /><br />
+    </main>
+  </body>
+</html>

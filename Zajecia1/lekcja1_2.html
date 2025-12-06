@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Lekcja  multimedia, tabele i formularze w HTML dla INF.03"
+    />
+    <title>Kontynuacja lekcji... multimedia</title>
+  </head>
+  <body>
+    <header>
+      <h1>HTML Multimedia, tabele i formularze</h1>
+    </header>
+    <main>
+      <h2>1. Multimedia</h2>
+      <h3>1.1 Obroz &lt;img&gt;</h3>
+      <img src="logoambitni.png" alt="Logo szkoły Ambitni" width="220" />
+      <br />
+      <img src="media/logoambitni.png" alt="Logo szkoły Ambitni" width="220" />
+      <!--
+        <img> – wstawia obraz.
+        src – ścieżka do pliku graficznego (relatywna lub absolutna).
+        alt – opis alternatywny (WYMAGANY na egzaminie; czytniki ekranu i sytuacje, gdy obraz się nie wczyta).
+        width="220" – szerokość obrazu w pikselach (zachowa proporcje, jeśli nie podano height).
+        -->
+      <h3>1.2 Video &lt;video&gt;</h3>
+      <video width="420" height="240" controls>
+        <!--
+            <video> – osadza materiał wideo.
+            controls – wyświetla domyślne przyciski sterujące (play/pause, głośność, pasek czasu).
+            width – docelowa szerokość odtwarzacza (wysokość dopasuje się proporcjonalnie).
+            -->
+        <source src="video/intro.mp4" type="video/mp4" />
+        <!--
+            <source> – źródło pliku multimedialnego.
+            src – ścieżka do pliku wideo,
+            type – typ MIME (np. video/mp4). Można dodać kilka <source> z różnymi formatami dla kompatybilności.
+            -->
+        Twoja przeglądarka nie obsługuje wideo.
+        <!--
+            Tekst alternatywny – wyświetli się, jeśli wideo nie może zostać odtworzone.
+            -->
+      </video>
+      <h3>1.3 Audio &lt;audio&gt;</h3>
+      <audio controls>
+        <!--
+            <audio> – osadza plik audio (muzyka, podcast itp.).
+            controls – wyświetla domyślne przyciski sterujące (play/pause, głośność, pasek czasu).
+            -->
+        <source src="audio/sample.mp3" type="audio/mpeg" />
+        <!--
+            <source> – źródło pliku audio.
+            src – ścieżka do pliku audio,
+            type – typ MIME (np. audio/mpeg). Można dodać kilka <source> z różnymi formatami dla kompatybilności.
+            -->
+        Twoja przeglądarka nie obsługuje odtwarzacza audio.
+        <!--
+            Tekst alternatywny – wyświetli się, jeśli audio nie może zostać odtworzone.
+            -->
+      </audio>
+      <hr />
+      <!--
+    <hr> – pozioma linia rozdzielająca sekcje (separator wizualny/semantyczny).
+    -->
+      <section id="tabele">
+        <h2>2. Tabele</h2>
+        <table border="1">
+          <!--
+                <table> – tworzy tabelę.
+                border="1" – dodaje obramowanie komórek (1px). Na egzaminie wymagane.
+                -->
+          <caption>
+            Przykładowa tabela
+          </caption>
+          <!--
+                <caption> – tytuł tabeli (opcjonalny, ale zalecany dla dostępności).
+                -->
+          <thead>
+            <!--
+                <thead> – sekcja nagłówka tabeli.
+                -->
+            <tr>
+              <!--
+                    <tr> – wiersz tabeli.
+                    -->
+              <th>Nazwa</th>
+              <!--
+                    <th> – komórka nagłówkowa (pogrubiona i wyśrodkowana).
+                    -->
+              <th>Wiek</th>
+              <th>Miasto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--
+                <tbody> – sekcja z danymi tabeli.
+                -->
+            <tr>
+              <td>Alice</td>
+              <!--
+                    <td> – zwykła komórka z danymi.
+                    -->
+              <td>30</td>
+              <td>Warszawa</td>
+            </tr>
+            <tr>
+              <td>Bob</td>
+              <td>25</td>
+              <td>Kraków</td>
+            </tr>
+            <tr>
+              <td>Charlie</td>
+              <td>35</td>
+              <td>Poznań</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <!--
+                <tfoot> – sekcja stopki tabeli (opcjonalna).
+                -->
+            <tr>
+              <td colspan="3">Liczba osób: 3</td>
+              <!--
+                    colspan="3" – komórka zajmuje 3 kolumny.
+                    -->
+            </tr>
+          </tfoot>
+        </table>
+
+        <h3>Łączenie komórek</h3>
+        <table border="1">
+          <tr>
+            <th>Imię</th>
+            <th colspan="2">Wyniki</th>
+            <!--
+                    colspan="2" – ta komórka nagłówkowa rozciąga się na 2 kolumny (łączenie poziome).
+                    -->
+          </tr>
+          <tr>
+            <td>Jan</td>
+            <td>85</td>
+            <td>92</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Anna</td>
+            <!--
+                    rowspan="2" – ta komórka rozciąga się na 2 wiersze (łączenie pionowe).
+                    -->
+            <td>78</td>
+            <td>88</td>
+          </tr>
+          <tr>
+            <td>90</td>
+            <td>95</td>
+          </tr>
+        </table>
+        <!--
+            Uwaga egzaminacyjna: zachowuj poprawną strukturę – tyle samo komórek w każdym wierszu po uwzględnieniu colspan/rowspan.
+            -->
+      </section>
+      <hr />
+      <section id="formularz">
+        <h2>Formularze</h2>
+        <form action="rejestracja.php" method="post">
+          <!--
+            <form> – kontener formularza.
+            action – adres/plik, do którego zostaną wysłane dane (tu: plik PHP – część backendowa, omówimy na PHP).
+            method="post" – sposób wysyłki:
+              GET – parametry w adresie URL (widoczne),
+              POST – parametry w treści zapytania (częściej do danych wrażliwych).
+            -->
+          <label for="fname">Imię:</label><br />
+          <!--
+                <label> – etykieta dla pola formularza (poprawia dostępność).
+                for="fname" – powiązanie etykiety z polem o id="fname".
+                -->
+          <input type="text" id="fname" name="fname" required />
+          <!--
+                <input> – pole formularza.
+                type="text" – pole tekstowe.
+                id – unikalny identyfikator (używany przez <label> i CSS/JS).
+                name – nazwa parametru wysyłanego do serwera (klucz w parze klucz=wartość).
+                required – pole obowiązkowe (przeglądarka wymusi wypełnienie przed wysłaniem).
+                -->
+          <br /><br />
+          <label for="haslo">Hasło</label>
+          <br />
+          <input type="password" id="haslo" name="haslo" required />
+          <!--
+                type="password" – ukrywa wpisywane znaki.
+                -->
+          <br /><br />
+          <label for="lname">Nazwisko:</label><br />
+          <input type="text" id="lname" name="lname" required />
+          <br /><br />
+          <label for="email">Email:</label><br />
+          <input type="email" id="email" name="email" value="12" required />
+          <!--
+                type="email" – pole na adres email (przeglądarka sprawdzi poprawność formatu).
+                value="12" – wartość domyślna (predefiniowana).
+                -->
+
+          <br /><br />
+          <label for="age">Wiek:</label><br />
+          <input type="number" id="age" name="age" min="1" max="120" />
+          <!--
+                type="number" – pole na liczbę.
+                min i max – ograniczenia wartości (tu: od 1 do 120).
+                -->
+          <br /><br />
+          <label for="country">Kraj:</label><br />
+          <select id="country" name="country" required>
+            <!--
+                    <select> – lista rozwijana (dropdown).
+                    -->
+            <option value="">Wybierz kraj</option>
+            <!--
+                    <option> – pojedyncza opcja w liście rozwijanej.
+                    value="" – wartość wysyłana do serwera, gdy ta opcja jest wybrana.
+                    -->
+            <option value="pl">Polska</option>
+            <option value="de">Niemcy</option>
+            <option value="fr">Francja</option>
+          </select>
+
+          <label for="tel">Telefon:</label>
+          <input
+            type="tel"
+            id="tel"
+            name="tel"
+            pattern="[0-4]{3}-[0-9]{3}-[0-9]{3}"
+            title="9 cyfr, bez spacji"
+            placeholder="123-456-789"
+          />
+          <!--
+            type="tel" – pole telefoniczne (nie weryfikuje formatu, ale można użyć pattern).
+            pattern – wyrażenie regularne (tu: dokładnie 9 cyfr 0-9).
+            title – opis reguły pokazywany przy błędnej walidacji.
+            -->
+
+            <!-- Textarea -->
+             <br><br>
+            <label for="opis">O sobie:</label>
+            <br>
+            <textarea id="opis" name="opis" rows="1" cols="30" ></textarea>
+            <!--
+            <textarea> – pole wielowierszowe.
+            rows/cols – sugerowana wielkość, i tak lepiej stylować w CSS (width/height).
+            -->
+
+                        <!-- Radio -->
+            <fieldset>
+                <!--
+                <fieldset> – grupuje logicznie powiązane pola formularza (np. radio).
+                Nadaje ramkę i poprawia dostępność (semantyka).
+                -->
+                <legend>Płeć</legend>
+                <!--
+                <legend> – tytuł grupy pól w <fieldset>.
+                -->
+                <label><input type="radio" name="plec" value="K"> Kobieta</label>
+                <label><input type="radio" name="plec" value="M"> Mężczyzna</label>
+                <!--
+                type="radio" – przyciski opcji; wspólny atrybut name oznacza jedną grupę (wybór wykluczający).
+                value – wartość wysyłana do backendu przy zaznaczeniu.
+                -->
+            </fieldset>
+
+            <!-- Checkbox -->
+            <label><input type="checkbox" name="regulamin" value="1" required> Akceptuję regulamin</label>
+            <!--
+            type="checkbox" – pole wielokrotnego wyboru (tak/nie).
+            required – zmusza do zaznaczenia przed wysyłką formularza.
+            -->
+          <button type="submit">Zarejestruj</button>
+        </form>
+      </section>
+      <hr>
+      <section id="egoztyczne">
+        <h2>Egzotyczne znaczniki</h2>
+        <p>Skrót <abbr title="Cascading Style Sheets">CSS</abbr> opisuje wygląd strony.</p>
+            <!--
+        <abbr> – skrót/akronim. Atrybut title podaje rozwinięcie skrótu (po najechaniu myszą).
+        -->
+        <p>Wydarzenie: <time datetime="2025-11-30">30 listopada 2025</time></p>
+        <!--
+        <time> – semantyczna data/godzina.
+        datetime – wersja maszynowa (format ISO), przydatne dla robotów i SEO.
+        -->
+        <p>Pobieranie: <progress value="70" max="100">70%</progress></p>
+        <!--
+        <progress> – pasek postępu.
+        value – aktualny stan, max – wartość maksymalna.
+        Tekst wewnątrz to fallback (gdy element nie jest obsługiwany).
+        -->
+        <p>Poziom naładowania: <meter min="0" max="100" low="20" high="80" value="32">45%</meter></p>
+        <!--
+        <meter> – miernik wartości w zakresie (np. poziom baterii).
+        min/max – zakres,
+        low/high – progi (niskiego i wysokiego poziomu),
+        value – bieżąca wartość.
+        -->
+      </section>
+    </main>
+    <br /><br /><br /><br /><br /><br /><br />
+  </body>
+</html>
