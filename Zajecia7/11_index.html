@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcja 11 – Odczytywanie wartości z kontrolek formularzy</title>
+</head>
+<body>
+
+<h1>Lekcja 11 – Odczytywanie wartości z kontrolek formularzy</h1>
+
+<p>
+W tej lekcji nauczysz się, jak w PHP odbierać dane z różnych typów kontrolek formularza.
+Nie wszystkie pola działają w taki sam sposób – inaczej odczytujemy kontrolki <strong>radio</strong>, 
+inaczej <strong>select</strong>, a jeszcze inaczej pola, które mogą wysłać wiele wartości, takie jak 
+<strong>checkboxy</strong> oraz listy wyboru <strong>multiple</strong>.
+</p>
+
+<h2>Co omówimy?</h2>
+<ul>
+    <li>Odczyt wartości z pól typu <strong>radio</strong> – pojedynczy wybór</li>
+    <li>Odczyt wartości z listy <strong>select</strong> – pojedynczy wybór</li>
+    <li>Odczyt wielu wartości z <strong>checkboxów</strong></li>
+    <li>Odczyt wielu wartości z listy <strong>select multiple</strong></li>
+    <li>Dlaczego dla wielu wartości musimy używać w name nawiasów []</li>
+    <li>Jak działają funkcje <strong>isset()</strong> i tablice w $_POST</li>
+</ul>
+
+<h2>Jak działa odbiór danych?</h2>
+<p>
+Wszystkie dane przesyłane z formularza HTML trafiają do jednej z tablic globalnych PHP:
+</p>
+<ul>
+    <li><strong>$_POST</strong> – gdy używamy <code>method="post"</code></li>
+    <li><strong>$_GET</strong> – gdy używamy <code>method="get"</code></li>
+</ul>
+
+<p>
+W przypadku radio i select – otrzymujemy jedną wartość w postaci zwykłej zmiennej.<br>
+W przypadku checkboxów i select multiple – dane trafiają do tablicy,
+dlatego musimy użyć <strong>name="cos[]" – nawiasy kwadratowe</strong>.
+</p>
+
+<h2>Przykładowy działający formularz</h2>
+<p>
+Kliknij w poniższy link, aby otworzyć gotowy formularz i zobaczyć, jak PHP odbiera dane:
+</p>
+
+<p>
+    <a href="11_kontrolki.php">▶ Otwórz lekcję – odczytywanie kontrolek (11_kontrolki.php)</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcja 10 – Funkcje wbudowane oraz zapis do pliku w PHP</title>
+    </head>
+<body>
+
+<h1>Lekcja 10 – Funkcje wbudowane oraz zapis do plików w PHP</h1>
+
+<div class="box">
+    <h2>1. Funkcje wbudowane w PHP</h2>
+    <p>PHP posiada bardzo dużo gotowych funkcji, dzięki którym nie musimy pisać wszystkiego od zera.
+       Funkcje te potrafią pracować na liczbach, tekstach, tablicach, datach oraz plikach.</p>
+
+    <h3>Najważniejsze funkcje w tej lekcji:</h3>
+    <ul>
+        <li><strong>rand()</strong>, <strong>mt_rand()</strong> – generowanie liczb losowych</li>
+        <li><strong>round()</strong>, <strong>floor()</strong>, <strong>ceil()</strong> – zaokrąglanie liczb</li>
+        <li><strong>strlen()</strong>, <strong>substr()</strong>, <strong>strtolower()</strong>, <strong>str_replace()</strong> – operacje na tekstach</li>
+        <li><strong>isset()</strong>, <strong>empty()</strong>, <strong>is_numeric()</strong> – sprawdzanie danych</li>
+        <li><strong>intval()</strong>, <strong>floatval()</strong>, <strong>strval()</strong> – konwersja typów</li>
+        <li><strong>explode()</strong>, <strong>implode()</strong>, <strong>trim()</strong> – pomocnicze operacje na tekstach</li>
+        <li><strong>uniqid()</strong>, <strong>var_dump()</strong> – narzędzia techniczne</li>
+    </ul>
+</div>
+
+<div class="box">
+    <h2>2. Zapis do plików – fopen(), fwrite(), fclose()</h2>
+    <p>PHP pozwala tworzyć i zapisywać pliki na serwerze. Do tego służą trzy podstawowe funkcje:</p>
+
+    <ul>
+        <li><strong>fopen("plik.txt", "w")</strong> – otwarcie pliku w trybie zapisu (nadpisuje zawartość)</li>
+        <li><strong>fwrite()</strong> – zapis danych do pliku</li>
+        <li><strong>fclose()</strong> – zamknięcie pliku</li>
+    </ul>
+
+    <pre><code>
+$plik = fopen("dane.txt", "w");
+fwrite($plik, "Linia 1\n");
+fwrite($plik, "Linia 2\n");
+fclose($plik);
+    </code></pre>
+</div>
+
+<div class="box">
+    <h2>3. Szybki zapis do pliku – file_put_contents()</h2>
+    <p>To uproszczona metoda zapisu, nie wymagająca otwierania i zamykania pliku.</p>
+
+    <pre><code>
+file_put_contents("log.txt", "Zapis jedną funkcją");
+file_put_contents("log.txt", "Dopisanie nowej linii\n", FILE_APPEND);
+    </code></pre>
+</div>
+
+<div class="box">
+    <h2>4. Plik PHP do tej lekcji</h2>
+    <p>Poniżej znajdziesz plik z przykładami użycia funkcji oraz zapisu do plików:</p>
+
+    <p><strong>10_funkcje_i_pliki.php</strong> – plik zawierający wszystkie przykłady z dokładnymi komentarzami do każdej linii.</p>
+
+    <p>Możesz go uruchomić na serwerze lokalnym XAMPP, aby zobaczyć wyniki działania funkcji.</p>
+</div>
+
+<div class="box">
+    <h2>5. Co musisz umieć po tej lekcji?</h2>
+    <ul>
+        <li>użyć funkcji rand(), strlen(), substr(), round() itd.,</li>
+        <li>sprawdzić czy zmienna istnieje i czy jest pusta,</li>
+        <li>konwertować typy danych (tekst → liczba),</li>
+        <li>zapisac dane do pliku na serwerze,</li>
+        <li>dopisać dane do istniejącego pliku,</li>
+        <li>wykryć błąd zapisu do pliku.</li>
+    </ul>
+</div>
+
+<div class="box">
+    <h2>6. Uruchom przykład</h2>
+<a href="10_funkcje_i_pliki.php">▶ Przykłady formatowania HTML</a>
+</div>
+
+</body>
+</html>
